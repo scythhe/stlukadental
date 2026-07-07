@@ -142,7 +142,7 @@ export const translations = {
 
   // Contact
   contact_eyebrow: { ka: "ჩაწერა და კონტაქტი", en: "Book & Contact" },
-  contact_title: { ka: "დაგვიტოვეთ თხოვნა", en: "Request an appointment" },
+  contact_title: { ka: "დაჯავშნე ვიზიტი", en: "Request an appointment" },
   contact_sub: {
     ka: "შეავსეთ ფორმა და ჩვენ მალე დაგიკავშირდებით ვიზიტის დასადასტურებლად.",
     en: "Fill in the form and we'll contact you shortly to confirm your appointment.",

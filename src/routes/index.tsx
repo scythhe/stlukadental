@@ -527,7 +527,7 @@ function Services({ lang }: { lang: Lang }) {
         </Reveal>
       </div>
 
-      <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-16 grid grid-cols-2 gap-4 sm:gap-8 lg:grid-cols-4">
         {svcs.map(({ icon: Icon, t: tk, d: dk, img }, i) => (
           <Reveal key={tk} delay={i * 0.08} className="h-full">
             <div className="group flex h-full flex-col overflow-hidden border border-border/80 bg-card shadow-[0_1px_2px_rgba(20,40,70,0.04)] transition-shadow duration-500 hover:shadow-[0_18px_40px_-16px_rgba(20,60,110,0.22)]">
@@ -537,21 +537,21 @@ function Services({ lang }: { lang: Lang }) {
                   alt={t(tk)}
                   className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
                 />
-                <span className="absolute top-4 left-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-gold/70 bg-background shadow-[0_2px_10px_rgba(20,40,70,0.14)]">
-                  <Icon className="h-4.5 w-4.5 text-gold" strokeWidth={1.25} />
+                <span className="absolute top-2 left-2 inline-flex h-8 w-8 items-center justify-center rounded-full border border-gold/70 bg-background shadow-[0_2px_10px_rgba(20,40,70,0.14)] sm:top-4 sm:left-4 sm:h-10 sm:w-10">
+                  <Icon className="h-3.5 w-3.5 text-gold sm:h-4.5 sm:w-4.5" strokeWidth={1.25} />
                 </span>
               </div>
-              <div className="flex flex-1 flex-col p-6">
+              <div className="flex flex-1 flex-col p-3 sm:p-6">
                 <h3
-                  className="text-[18px] leading-snug text-primary"
+                  className="text-[14px] leading-snug text-primary sm:text-[18px]"
                   style={{ fontFamily: "var(--font-serif)" }}
                 >
                   {t(tk)}
                 </h3>
-                <p className="mt-2 flex-1 text-[13px] leading-relaxed text-foreground/65">
+                <p className="mt-1.5 flex-1 text-[11.5px] leading-relaxed text-foreground/65 sm:mt-2 sm:text-[13px]">
                   {t(dk)}
                 </p>
-                <div className="mt-5 h-px w-8 bg-gold/60 transition-all duration-500 group-hover:w-14" />
+                <div className="mt-3 h-px w-6 bg-gold/60 transition-all duration-500 group-hover:w-14 sm:mt-5 sm:w-8" />
               </div>
             </div>
           </Reveal>
@@ -575,13 +575,7 @@ function WhyUs({ lang }: { lang: Lang }) {
         <div className="lg:col-span-6">
           <Reveal>
             <div className="relative">
-              <div className="w-full overflow-hidden border border-border/80" style={{ aspectRatio: "5 / 6" }}>
-                <img
-                  src="/img/interior.jpg"
-                  alt={lang === "ka" ? "კლინიკის ინტერიერი" : "Clinic interior"}
-                  className="h-full w-full object-cover"
-                />
-              </div>
+              <ImagePlaceholder ratio="5 / 6" label={lang === "ka" ? "სურათი / Interior" : "Image / Interior"} />
               <div
                 aria-hidden
                 className="pointer-events-none absolute -bottom-4 -left-4 -z-10 h-full w-full border border-gold/50"

@@ -9,12 +9,9 @@ import {
   Shield,
   HeartHandshake,
   Languages,
-  Stethoscope,
   Droplets,
   Activity,
   Crown,
-  Sun,
-  Siren,
   MapPin,
   Clock,
   Mail,
@@ -31,7 +28,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "მზრუნველი, უმტკივნეულო სტომატოლოგია თბილისის გულში — დოქტ. სალომეს გუნდი. Painless, refined dentistry in the heart of Tbilisi.",
+          "მზრუნველი, უმტკივნეულო სტომატოლოგია თბილისის გულში — მიხეილ ბახტაძის გუნდი. Painless, refined dentistry in the heart of Tbilisi.",
       },
     ],
   }),
@@ -84,6 +81,95 @@ function ImagePlaceholder({
     >
       <div className="img-placeholder-inner transition-transform duration-[900ms] group-hover:scale-[1.03]">
         <span>{label}</span>
+      </div>
+    </div>
+  );
+}
+
+function BeforeAfterSlider({
+  before,
+  after,
+  beforeLabel,
+  afterLabel,
+}: {
+  before: string;
+  after: string;
+  beforeLabel: string;
+  afterLabel: string;
+}) {
+  const [pos, setPos] = useState(50);
+  const ref = useRef<HTMLDivElement>(null);
+  const dragging = useRef(false);
+
+  const updateFromClientX = (clientX: number) => {
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const pct = ((clientX - rect.left) / rect.width) * 100;
+    setPos(Math.min(100, Math.max(0, pct)));
+  };
+
+  useEffect(() => {
+    const onMove = (e: PointerEvent) => {
+      if (!dragging.current) return;
+      updateFromClientX(e.clientX);
+    };
+    const onUp = () => {
+      dragging.current = false;
+    };
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", onUp);
+    return () => {
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+    };
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className="relative aspect-[4/5] w-full touch-none select-none overflow-hidden border border-border/80"
+      onPointerDown={(e) => {
+        dragging.current = true;
+        updateFromClientX(e.clientX);
+      }}
+    >
+      <img
+        src={after}
+        alt={afterLabel}
+        draggable={false}
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+      />
+      <img
+        src={before}
+        alt={beforeLabel}
+        draggable={false}
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+        style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}
+      />
+
+      <div
+        aria-hidden
+        className="absolute top-2 left-2 border-t border-primary-foreground/70 bg-primary/85 px-2 py-1 text-[8px] tracking-[0.16em] text-primary-foreground uppercase sm:top-3 sm:left-3 sm:px-2.5 sm:text-[9px]"
+        style={{ opacity: pos > 12 ? 1 : 0, transition: "opacity 200ms" }}
+      >
+        {beforeLabel}
+      </div>
+      <div
+        aria-hidden
+        className="absolute top-2 right-2 border-t border-primary-foreground/70 bg-primary/85 px-2 py-1 text-[8px] tracking-[0.16em] text-primary-foreground uppercase sm:top-3 sm:right-3 sm:px-2.5 sm:text-[9px]"
+        style={{ opacity: pos < 88 ? 1 : 0, transition: "opacity 200ms" }}
+      >
+        {afterLabel}
+      </div>
+
+      <div
+        className="pointer-events-none absolute top-0 bottom-0 w-px bg-gold"
+        style={{ left: `${pos}%` }}
+      >
+        <div className="pointer-events-none absolute top-1/2 left-1/2 flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-gold bg-background/95 shadow-md sm:h-8 sm:w-8">
+          <span className="text-[9px] text-primary sm:text-[11px]">↔</span>
+        </div>
       </div>
     </div>
   );
@@ -282,7 +368,7 @@ function Hero({ lang }: { lang: Lang }) {
         className="pointer-events-none absolute inset-0 -z-10"
         style={{
           background:
-            "radial-gradient(60% 50% at 80% 20%, oklch(0.9 0.03 200 / 0.35), transparent 70%), radial-gradient(50% 40% at 10% 60%, oklch(0.9 0.04 82 / 0.35), transparent 70%)",
+            "radial-gradient(60% 50% at 80% 20%, oklch(0.9 0.05 235 / 0.4), transparent 70%), radial-gradient(50% 40% at 10% 60%, oklch(0.92 0.04 85 / 0.3), transparent 70%)",
         }}
       />
 
@@ -334,14 +420,19 @@ function Hero({ lang }: { lang: Lang }) {
           </Reveal>
         </div>
 
-        {/* Hero image placeholder */}
+        {/* Hero image */}
         <div className="lg:col-span-6">
           <motion.div style={{ y }} className="relative">
-            <ImagePlaceholder
-              ratio="4 / 5"
-              label={t("hero_image_label")}
-              className="w-full"
-            />
+            <div
+              className="w-full overflow-hidden border border-border/80"
+              style={{ aspectRatio: "4 / 5" }}
+            >
+              <img
+                src="/img/interior-hero.jpg"
+                alt={lang === "ka" ? "პაციენტი და ექიმი კლინიკაში" : "Patient and doctor at the clinic"}
+                className="h-full w-full object-cover object-[50%_22%]"
+              />
+            </div>
             {/* Decorative gold frame offset */}
             <div
               aria-hidden
@@ -408,62 +499,63 @@ function TrustBar({ lang }: { lang: Lang }) {
 function Services({ lang }: { lang: Lang }) {
   const t = useT(lang);
   const svcs = [
-    { icon: Stethoscope, t: "svc_1_t", d: "svc_1_d" },
-    { icon: Droplets, t: "svc_2_t", d: "svc_2_d" },
-    { icon: Activity, t: "svc_3_t", d: "svc_3_d" },
-    { icon: Crown, t: "svc_4_t", d: "svc_4_d" },
-    { icon: Sun, t: "svc_5_t", d: "svc_5_d" },
-    { icon: Siren, t: "svc_6_t", d: "svc_6_d" },
+    { icon: Droplets, t: "svc_feat_1_t", d: "svc_feat_1_d", img: "/img/svc-cleaning.jpg" },
+    { icon: Activity, t: "svc_feat_2_t", d: "svc_feat_2_d", img: "/img/svc-implant.jpg" },
+    { icon: Crown, t: "svc_feat_3_t", d: "svc_feat_3_d", img: "/img/svc-metalceramics.jpg" },
+    { icon: Sparkles, t: "svc_feat_4_t", d: "svc_feat_4_d", img: "/img/svc-zircon.jpg" },
   ] as const;
 
   return (
     <section id="services" className="mx-auto max-w-[1400px] px-6 py-28 lg:px-10 lg:py-36">
-      <div className="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-16">
-        <div className="lg:col-span-4">
-          <Reveal>
-            <div className="flex items-center gap-3">
-              <span className="hairline" />
-              <span className="eyebrow">{t("services_eyebrow")}</span>
+      <div className="mx-auto max-w-2xl text-center">
+        <Reveal>
+          <div className="flex items-center justify-center gap-3">
+            <span className="hairline" />
+            <span className="eyebrow">{t("services_eyebrow")}</span>
+            <span className="hairline" />
+          </div>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <h2 className="mt-6 text-[clamp(2rem,3.5vw,3rem)] leading-[1.1] text-primary">
+            {t("services_title")}
+          </h2>
+        </Reveal>
+        <Reveal delay={0.2}>
+          <p className="mt-5 text-[15px] leading-relaxed text-foreground/70">
+            {t("services_sub")}
+          </p>
+        </Reveal>
+      </div>
+
+      <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {svcs.map(({ icon: Icon, t: tk, d: dk, img }, i) => (
+          <Reveal key={tk} delay={i * 0.08} className="h-full">
+            <div className="group flex h-full flex-col overflow-hidden border border-border/80 bg-card shadow-[0_1px_2px_rgba(20,40,70,0.04)] transition-shadow duration-500 hover:shadow-[0_18px_40px_-16px_rgba(20,60,110,0.22)]">
+              <div className="relative aspect-square w-full overflow-hidden bg-muted">
+                <img
+                  src={img}
+                  alt={t(tk)}
+                  className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+                />
+                <span className="absolute top-4 left-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-gold/70 bg-background shadow-[0_2px_10px_rgba(20,40,70,0.14)]">
+                  <Icon className="h-4.5 w-4.5 text-gold" strokeWidth={1.25} />
+                </span>
+              </div>
+              <div className="flex flex-1 flex-col p-6">
+                <h3
+                  className="text-[18px] leading-snug text-primary"
+                  style={{ fontFamily: "var(--font-serif)" }}
+                >
+                  {t(tk)}
+                </h3>
+                <p className="mt-2 flex-1 text-[13px] leading-relaxed text-foreground/65">
+                  {t(dk)}
+                </p>
+                <div className="mt-5 h-px w-8 bg-gold/60 transition-all duration-500 group-hover:w-14" />
+              </div>
             </div>
           </Reveal>
-          <Reveal delay={0.1}>
-            <h2 className="mt-6 text-[clamp(2rem,3.5vw,3rem)] leading-[1.1] text-primary">
-              {t("services_title")}
-            </h2>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <p className="mt-6 max-w-md text-[15px] leading-relaxed text-foreground/70">
-              {t("services_sub")}
-            </p>
-          </Reveal>
-        </div>
-
-        <div className="lg:col-span-8">
-          <div className="grid grid-cols-1 gap-px overflow-hidden border border-border/80 bg-border/80 sm:grid-cols-2">
-            {svcs.map(({ icon: Icon, t: tk, d: dk }, i) => (
-              <Reveal key={tk} delay={i * 0.05}>
-                <div className="group flex h-full flex-col justify-between bg-card p-8 transition-colors duration-500 hover:bg-ivory sm:p-10">
-                  <div>
-                    <Icon
-                      className="h-6 w-6 text-gold transition-transform duration-500 group-hover:-translate-y-0.5"
-                      strokeWidth={1.25}
-                    />
-                    <h3
-                      className="mt-6 text-[19px] leading-snug text-primary"
-                      style={{ fontFamily: "var(--font-serif)" }}
-                    >
-                      {t(tk)}
-                    </h3>
-                    <p className="mt-3 text-[13.5px] leading-relaxed text-foreground/65">
-                      {t(dk)}
-                    </p>
-                  </div>
-                  <div className="mt-8 h-px w-8 bg-gold/60 transition-all duration-500 group-hover:w-14" />
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
+        ))}
       </div>
     </section>
   );
@@ -483,7 +575,13 @@ function WhyUs({ lang }: { lang: Lang }) {
         <div className="lg:col-span-6">
           <Reveal>
             <div className="relative">
-              <ImagePlaceholder ratio="5 / 6" label={lang === "ka" ? "სურათი / Interior" : "Image / Interior"} />
+              <div className="w-full overflow-hidden border border-border/80" style={{ aspectRatio: "5 / 6" }}>
+                <img
+                  src="/img/interior.jpg"
+                  alt={lang === "ka" ? "კლინიკის ინტერიერი" : "Clinic interior"}
+                  className="h-full w-full object-cover"
+                />
+              </div>
               <div
                 aria-hidden
                 className="pointer-events-none absolute -bottom-4 -left-4 -z-10 h-full w-full border border-gold/50"
@@ -532,6 +630,59 @@ function WhyUs({ lang }: { lang: Lang }) {
 }
 
 /* ------------------------------------------------------------------ */
+/* Before / After                                                      */
+/* ------------------------------------------------------------------ */
+
+function BeforeAfter({ lang }: { lang: Lang }) {
+  const t = useT(lang);
+
+  return (
+    <section className="bg-ivory">
+      <div className="mx-auto max-w-[1400px] px-6 py-24 lg:px-10 lg:py-28">
+        <div className="mx-auto max-w-xl text-center">
+          <Reveal>
+            <div className="flex items-center justify-center gap-3">
+              <span className="hairline" />
+              <span className="eyebrow">{t("ba_eyebrow")}</span>
+              <span className="hairline" />
+            </div>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <h2 className="mt-6 text-[clamp(2rem,3.5vw,3rem)] leading-[1.1] text-primary">
+              {t("ba_title")}
+            </h2>
+          </Reveal>
+          <Reveal delay={0.2}>
+            <p className="mt-4 text-[14px] leading-relaxed text-foreground/65">
+              {t("ba_sub")}
+            </p>
+          </Reveal>
+        </div>
+
+        <div className="mx-auto mt-12 grid max-w-[560px] grid-cols-2 gap-4 sm:gap-6">
+          <Reveal>
+            <BeforeAfterSlider
+              before="/img/ba-before-1.jpg"
+              after="/img/ba-after-1.jpg"
+              beforeLabel={t("ba_before")}
+              afterLabel={t("ba_after")}
+            />
+          </Reveal>
+          <Reveal delay={0.1}>
+            <BeforeAfterSlider
+              before="/img/ba-before-2.jpg"
+              after="/img/ba-after-2.jpg"
+              beforeLabel={t("ba_before")}
+              afterLabel={t("ba_after")}
+            />
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /* Team                                                                */
 /* ------------------------------------------------------------------ */
 
@@ -559,12 +710,18 @@ function Team({ lang }: { lang: Lang }) {
         </Reveal>
       </div>
 
-      {/* Featured: Dr. Salome */}
+      {/* Featured: Mikheil Bakhtadze */}
       <div className="mt-20 grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-5">
           <Reveal>
             <div className="relative">
-              <ImagePlaceholder ratio="4 / 5" label={lang === "ka" ? "პორტრეტი" : "Portrait"} />
+              <div className="aspect-[4/5] w-full overflow-hidden border border-border/80">
+                <img
+                  src="/img/mikheil-bakhtadze.jpg"
+                  alt={lang === "ka" ? "მიხეილ ბახტაძე" : "Mikheil Bakhtadze"}
+                  className="h-full w-full object-cover"
+                />
+              </div>
               <div
                 aria-hidden
                 className="pointer-events-none absolute -bottom-4 -right-4 -z-10 h-full w-full border border-gold/50"
@@ -574,7 +731,7 @@ function Team({ lang }: { lang: Lang }) {
         </div>
         <div className="lg:col-span-7">
           <Reveal delay={0.1}>
-            <span className="eyebrow">{lang === "ka" ? "სამედიცინო დირექტორი" : "Medical Director"}</span>
+            <span className="eyebrow">{lang === "ka" ? "მფლობელი" : "Owner"}</span>
             <h3
               className="mt-4 text-[clamp(1.8rem,3vw,2.6rem)] leading-[1.05] text-primary"
               style={{ fontFamily: "var(--font-serif)" }}
@@ -591,9 +748,18 @@ function Team({ lang }: { lang: Lang }) {
               <span className="hairline" />
               <span>
                 {lang === "ka"
-                  ? "პაციენტების არჩევანი"
-                  : "A patient favourite"}
+                  ? "30+ წელი გამოცდილება"
+                  : "30+ years of experience"}
               </span>
+            </div>
+            <div className="mt-8">
+              <a
+                href="#contact"
+                className="group inline-flex items-center gap-3 border border-primary bg-primary px-7 py-3.5 text-[12px] tracking-[0.22em] text-primary-foreground transition-all hover:bg-transparent hover:text-primary"
+              >
+                <Calendar className="h-3.5 w-3.5" strokeWidth={1.5} />
+                {t("book").toUpperCase()}
+              </a>
             </div>
           </Reveal>
         </div>
@@ -651,7 +817,7 @@ function Reviews({ lang }: { lang: Lang }) {
         className="pointer-events-none absolute inset-0 opacity-40"
         style={{
           background:
-            "radial-gradient(50% 40% at 20% 0%, oklch(0.5 0.06 210 / 0.6), transparent 70%), radial-gradient(40% 30% at 90% 100%, oklch(0.72 0.09 82 / 0.15), transparent 70%)",
+            "radial-gradient(50% 40% at 20% 0%, oklch(0.55 0.1 240 / 0.6), transparent 70%), radial-gradient(40% 30% at 90% 100%, oklch(0.74 0.08 85 / 0.15), transparent 70%)",
         }}
       />
 
@@ -974,6 +1140,7 @@ function Home() {
         <TrustBar lang={lang} />
         <Services lang={lang} />
         <WhyUs lang={lang} />
+        <BeforeAfter lang={lang} />
         <Team lang={lang} />
         <Reviews lang={lang} />
         <Contact lang={lang} />

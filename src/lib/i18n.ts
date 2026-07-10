@@ -75,6 +75,28 @@ export const translations = {
     en: "Fast, calm response when you need us most.",
   },
 
+  // Featured services (homepage cards with photos)
+  svc_feat_1_t: { ka: "წმენდა", en: "Professional Cleaning" },
+  svc_feat_1_d: {
+    ka: "ღრმა, დელიკატური კბილების წმენდა და პროფესიული ჰიგიენა ბრწყინვალე შედეგისთვის.",
+    en: "Deep, gentle teeth cleaning and professional hygiene for a brilliant result.",
+  },
+  svc_feat_2_t: { ka: "იმპლანტაცია", en: "Implants" },
+  svc_feat_2_d: {
+    ka: "თანამედროვე იმპლანტები, რომლებიც აღადგენენ ღიმილს ბუნებრივი სიმტკიცითა და სიცოცხლისუნარიანობით.",
+    en: "Modern implants that restore your smile with natural strength and longevity.",
+  },
+  svc_feat_3_t: { ka: "მეტალოკერამიკა", en: "Metal-Ceramic Crowns" },
+  svc_feat_3_d: {
+    ka: "გამძლე და ესთეტიური გვირგვინები, სანდო არჩევანი ყოველდღიური სიმტკიცისთვის.",
+    en: "Durable, aesthetic crowns — a trusted choice for everyday strength.",
+  },
+  svc_feat_4_t: { ka: "ცირკონი", en: "Zirconia Crowns" },
+  svc_feat_4_d: {
+    ka: "პრემიუმ კლასის, ბუნებრივად გამჭვირვალე გვირგვინები უმაღლესი ესთეტიკისთვის.",
+    en: "Premium, naturally translucent crowns for the highest level of aesthetics.",
+  },
+
   // Why us
   why_eyebrow: { ka: "რატომ ჩვენ", en: "Why Choose Us" },
   why_title: {
@@ -94,6 +116,16 @@ export const translations = {
   why_b3: { ka: "გარემო, სადაც ყველა ექიმს ენდობი", en: "An environment where you trust every doctor" },
   why_b4: { ka: "მრავალენოვანი გუნდი", en: "Multilingual team" },
 
+  // Before / After
+  ba_eyebrow: { ka: "შედეგები", en: "Results" },
+  ba_title: { ka: "მანამდე / შემდეგ", en: "Before / After" },
+  ba_sub: {
+    ka: "გადაადგილეთ ხაზი და ნახეთ განსხვავება.",
+    en: "Drag the slider to see the difference.",
+  },
+  ba_before: { ka: "მანამდე", en: "Before" },
+  ba_after: { ka: "შემდეგ", en: "After" },
+
   // Team
   team_eyebrow: { ka: "ჩვენი გუნდი", en: "Our Team" },
   team_title: { ka: "ხელოვნება მოსიყვარულე ხელებში", en: "Craft in caring hands" },
@@ -101,11 +133,11 @@ export const translations = {
     ka: "გამოცდილი, თბილი და მიდგომაში პრეციზული სპეციალისტები.",
     en: "Experienced, warm, and precise specialists.",
   },
-  team_1_name: { ka: "დოქ. სალომე", en: "Dr. Salome" },
-  team_1_role: { ka: "სამედიცინო დირექტორი · სტომატოლოგი", en: "Medical Director · Dentist" },
+  team_1_name: { ka: "მიხეილ ბახტაძე", en: "Mikheil Bakhtadze" },
+  team_1_role: { ka: "მფლობელი და მთავარი ექიმი", en: "Owner & Chief Doctor" },
   team_1_bio: {
-    ka: "პაციენტების საყვარელი ექიმი — ცნობილი დელიკატური მიდგომითა და ზუსტი ხელით.",
-    en: "A patient favourite — known for a delicate approach and a precise hand.",
+    ka: "კლინიკის გულისცემა — 30 წელზე მეტი გამოცდილება პირის ღრუს ქირურგიაში, იმპლანტოლოგიასა და პროთეზირებაში. მისი ცოდნა სტომატოლოგიურ მკურნალობას სანდო და პერსონალურ გამოცდილებად აქცევს.",
+    en: "The heart behind every smile at the clinic — over 30 years of experience in oral surgery, implantology, and prosthetic dentistry. His expertise turns dental treatment into a trusted, personalized experience.",
   },
   team_2_name: { ka: "ექიმი", en: "Dentist" },
   team_2_role: { ka: "სტომატოლოგი-თერაპევტი", en: "Dentist-Therapist" },
@@ -130,8 +162,8 @@ export const translations = {
   },
   review_1_author: { ka: "ემილი", en: "Emil X." },
   review_2_text: {
-    ka: "სალომე საუკეთესო სტომატოლოგია! ნამდვილად გირჩევთ!",
-    en: "Salome is the best dentist! Definitely recommend!",
+    ka: "ბატონი მიხეილი საუკეთესო სტომატოლოგია! ნამდვილად გირჩევთ!",
+    en: "Dr. Bakhtadze is the best dentist! Definitely recommend!",
   },
   review_2_author: { ka: "სალი", en: "Sally W." },
   review_3_text: {

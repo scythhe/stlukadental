@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /* Refined medical luxury design system.
- * Palette: ivory base, deep petrol-teal primary, champagne-gold accent.
+ * Palette: white base with light-blue wash, azure-blue primary, soft champagne-gold accent.
  * Type: Noto Serif Georgian (display), FiraGO (body) — flawless Georgian.
  */
 
@@ -46,40 +46,40 @@
 :root {
   --radius: 0.375rem;
 
-  /* Warm ivory base */
-  --background: oklch(0.985 0.008 85);           /* #faf7f1 ish */
-  --ivory: oklch(0.975 0.012 82);
-  --foreground: oklch(0.24 0.028 210);           /* deep ink w/ teal cast */
+  /* Cool white base with a light-blue wash */
+  --background: oklch(0.99 0.004 240);
+  --ivory: oklch(0.965 0.016 235);
+  --foreground: oklch(0.26 0.05 250);            /* deep navy ink */
 
-  --card: oklch(0.995 0.005 85);
-  --card-foreground: oklch(0.24 0.028 210);
-  --popover: oklch(0.995 0.005 85);
-  --popover-foreground: oklch(0.24 0.028 210);
+  --card: oklch(0.995 0.003 240);
+  --card-foreground: oklch(0.26 0.05 250);
+  --popover: oklch(0.995 0.003 240);
+  --popover-foreground: oklch(0.26 0.05 250);
 
-  /* Deep petrol teal — primary */
-  --primary: oklch(0.34 0.045 210);
-  --primary-foreground: oklch(0.98 0.008 85);
+  /* Azure / light blue — primary */
+  --primary: oklch(0.5 0.135 240);
+  --primary-foreground: oklch(0.99 0.004 240);
 
-  --secondary: oklch(0.94 0.012 85);
-  --secondary-foreground: oklch(0.28 0.03 210);
+  --secondary: oklch(0.95 0.02 235);
+  --secondary-foreground: oklch(0.32 0.06 245);
 
-  --muted: oklch(0.93 0.01 85);
-  --muted-foreground: oklch(0.48 0.02 220);
+  --muted: oklch(0.945 0.015 235);
+  --muted-foreground: oklch(0.5 0.025 240);
 
-  --accent: oklch(0.92 0.018 85);
-  --accent-foreground: oklch(0.3 0.03 210);
+  --accent: oklch(0.93 0.025 232);
+  --accent-foreground: oklch(0.32 0.06 245);
 
-  /* Champagne gold accent */
-  --gold: oklch(0.72 0.09 82);
-  --gold-soft: oklch(0.86 0.05 85);
-  --taupe: oklch(0.82 0.015 80);
+  /* Soft champagne-gold accent */
+  --gold: oklch(0.74 0.08 85);
+  --gold-soft: oklch(0.88 0.045 85);
+  --taupe: oklch(0.85 0.02 235);
 
   --destructive: oklch(0.55 0.19 27);
   --destructive-foreground: oklch(0.985 0.008 85);
 
-  --border: oklch(0.88 0.012 80);
-  --input: oklch(0.9 0.01 80);
-  --ring: oklch(0.34 0.045 210);
+  --border: oklch(0.9 0.014 235);
+  --input: oklch(0.92 0.012 235);
+  --ring: oklch(0.5 0.135 240);
 }
 
 @layer base {
@@ -125,11 +125,11 @@
   font-weight: 500;
 }
 
-/* Elegant image placeholder — soft ivory/taupe with thin frame */
+/* Elegant image placeholder — soft light-blue wash with thin frame */
 @utility img-placeholder {
   position: relative;
   background:
-    linear-gradient(135deg, oklch(0.94 0.012 82) 0%, oklch(0.9 0.015 80) 100%);
+    linear-gradient(135deg, oklch(0.95 0.02 232) 0%, oklch(0.9 0.025 235) 100%);
   border: 1px solid var(--border);
   overflow: hidden;
   transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -137,11 +137,11 @@
 @utility img-placeholder-inner {
   position: absolute;
   inset: 0.75rem;
-  border: 1px solid oklch(0.82 0.015 80 / 0.7);
+  border: 1px solid oklch(0.8 0.02 235 / 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: oklch(0.5 0.02 80);
+  color: oklch(0.5 0.03 240);
   font-size: 0.7rem;
   letter-spacing: 0.24em;
   text-transform: uppercase;

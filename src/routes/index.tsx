@@ -228,15 +228,15 @@ function Header({
       <div className="mx-auto grid max-w-[1400px] grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-6 lg:grid-cols-3 lg:px-10">
         {/* Logo */}
         <a href="#top" className="flex min-w-0 items-center gap-3">
-          <Monogram />
+          <Monogram className={scrolled ? "" : "border-primary-foreground/60! text-primary-foreground!"} />
           <span className="min-w-0 truncate">
             <span
-              className="block truncate text-[13px] leading-tight text-foreground sm:text-sm"
+              className={`block truncate text-[13px] leading-tight sm:text-sm ${scrolled ? "text-foreground" : "text-primary-foreground"}`}
               style={{ fontFamily: "var(--font-serif)" }}
             >
               {t("clinic_name_short")}
             </span>
-            <span className="hidden text-[10px] uppercase tracking-[0.24em] text-muted-foreground sm:block">
+            <span className={`hidden text-[10px] uppercase tracking-[0.24em] sm:block ${scrolled ? "text-muted-foreground" : "text-primary-foreground/60"}`}>
               Tbilisi · Est.
             </span>
           </span>
@@ -248,7 +248,9 @@ function Header({
             <a
               key={l.href}
               href={l.href}
-              className="text-[13px] tracking-wide text-foreground/75 transition-colors hover:text-primary"
+              className={`text-[13px] tracking-wide transition-colors ${
+                scrolled ? "text-foreground/75 hover:text-primary" : "text-primary-foreground/80 hover:text-primary-foreground"
+              }`}
             >
               {t(l.key)}
             </a>
@@ -257,11 +259,15 @@ function Header({
 
         {/* Right cluster */}
         <div className="flex items-center justify-end gap-3">
-          <div className="hidden items-center gap-1 border border-border/70 px-1 py-0.5 text-[11px] tracking-[0.2em] md:flex">
+          <div className={`hidden items-center gap-1 border px-1 py-0.5 text-[11px] tracking-[0.2em] md:flex ${scrolled ? "border-border/70" : "border-primary-foreground/30"}`}>
             <button
               onClick={() => setLang("ka")}
               className={`px-2 py-1 transition-colors ${
-                lang === "ka" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"
+                lang === "ka"
+                  ? "bg-primary text-primary-foreground"
+                  : scrolled
+                    ? "text-muted-foreground hover:text-foreground"
+                    : "text-primary-foreground/60 hover:text-primary-foreground"
               }`}
               aria-pressed={lang === "ka"}
             >
@@ -270,7 +276,11 @@ function Header({
             <button
               onClick={() => setLang("en")}
               className={`px-2 py-1 transition-colors ${
-                lang === "en" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"
+                lang === "en"
+                  ? "bg-primary text-primary-foreground"
+                  : scrolled
+                    ? "text-muted-foreground hover:text-foreground"
+                    : "text-primary-foreground/60 hover:text-primary-foreground"
               }`}
               aria-pressed={lang === "en"}
             >
@@ -280,7 +290,9 @@ function Header({
 
           <a
             href="tel:+995599808202"
-            className="hidden items-center gap-2 text-[13px] text-foreground/80 transition-colors hover:text-primary md:inline-flex"
+            className={`hidden items-center gap-2 text-[13px] transition-colors md:inline-flex ${
+              scrolled ? "text-foreground/80 hover:text-primary" : "text-primary-foreground/85 hover:text-primary-foreground"
+            }`}
           >
             <Phone className="h-3.5 w-3.5 text-gold" strokeWidth={1.5} />
             599 80 82 02
@@ -288,14 +300,20 @@ function Header({
 
           <a
             href="#contact"
-            className="hidden items-center gap-2 border border-primary bg-primary px-4 py-2.5 text-[12px] tracking-[0.18em] text-primary-foreground transition-all hover:bg-transparent hover:text-primary sm:inline-flex"
+            className={`hidden items-center gap-2 border px-4 py-2.5 text-[12px] tracking-[0.18em] transition-all sm:inline-flex ${
+              scrolled
+                ? "border-primary bg-primary text-primary-foreground hover:bg-transparent hover:text-primary"
+                : "border-primary-foreground bg-primary-foreground text-primary hover:bg-transparent hover:text-primary-foreground"
+            }`}
           >
             {t("book").toUpperCase()}
           </a>
 
           <button
             onClick={() => setOpen((o) => !o)}
-            className="inline-flex h-10 w-10 items-center justify-center border border-border lg:hidden"
+            className={`inline-flex h-10 w-10 items-center justify-center border lg:hidden ${
+              scrolled ? "border-border text-foreground" : "border-primary-foreground/40 text-primary-foreground"
+            }`}
             aria-label="menu"
           >
             {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
@@ -361,34 +379,46 @@ function Hero({ lang }: { lang: Lang }) {
   const y = useTransform(scrollYProgress, [0, 1], [0, 80]);
 
   return (
-    <section id="top" ref={ref} className="relative overflow-hidden pt-32 lg:pt-40">
-      {/* Soft backdrop wash */}
+    <section id="top" ref={ref} className="relative isolate overflow-hidden pt-32 lg:pt-40">
+      {/* Full-bleed dark panel with angled bottom edge */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10"
         style={{
+          height: "clamp(680px, 94vh, 1120px)",
           background:
-            "radial-gradient(60% 50% at 80% 20%, oklch(0.9 0.05 235 / 0.4), transparent 70%), radial-gradient(50% 40% at 10% 60%, oklch(0.92 0.04 85 / 0.3), transparent 70%)",
+            "linear-gradient(155deg, oklch(0.32 0.08 240) 0%, oklch(0.5 0.135 240) 55%, oklch(0.44 0.11 235) 100%)",
+          clipPath: "polygon(0 0, 100% 0, 100% 82%, 0 100%)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 opacity-50"
+        style={{
+          height: "clamp(680px, 94vh, 1120px)",
+          background:
+            "radial-gradient(45% 55% at 88% 12%, oklch(0.72 0.09 85 / 0.35), transparent 70%)",
+          clipPath: "polygon(0 0, 100% 0, 100% 82%, 0 100%)",
         }}
       />
 
-      <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-14 px-6 pb-24 lg:grid-cols-12 lg:gap-16 lg:px-10 lg:pb-32">
+      <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-14 px-6 pb-32 lg:grid-cols-12 lg:gap-16 lg:px-10 lg:pb-44">
         <div className="lg:col-span-6">
           <Reveal>
             <div className="flex items-center gap-3">
-              <span className="hairline" />
-              <span className="eyebrow">{t("hero_eyebrow")}</span>
+              <span className="hairline" style={{ background: "var(--gold)" }} />
+              <span className="eyebrow" style={{ color: "var(--gold-soft)" }}>{t("hero_eyebrow")}</span>
             </div>
           </Reveal>
 
           <Reveal delay={0.1}>
-            <h1 className="mt-6 text-[clamp(2.6rem,6vw,5rem)] leading-[1.02] tracking-[-0.02em] text-primary">
+            <h1 className="mt-6 text-[clamp(2.6rem,6vw,5rem)] leading-[1.02] tracking-[-0.02em] text-primary-foreground">
               {t("hero_headline")}
             </h1>
           </Reveal>
 
           <Reveal delay={0.2}>
-            <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-foreground/70">
+            <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-primary-foreground/75">
               {t("hero_sub")}
             </p>
           </Reveal>
@@ -397,14 +427,14 @@ function Hero({ lang }: { lang: Lang }) {
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <a
                 href="#contact"
-                className="group inline-flex items-center gap-3 border border-primary bg-primary px-7 py-3.5 text-[12px] tracking-[0.22em] text-primary-foreground transition-all hover:bg-transparent hover:text-primary"
+                className="group inline-flex items-center gap-3 border border-primary-foreground bg-primary-foreground px-7 py-3.5 text-[12px] tracking-[0.22em] text-primary transition-all hover:bg-transparent hover:text-primary-foreground"
               >
                 <Calendar className="h-3.5 w-3.5" strokeWidth={1.5} />
                 {t("book").toUpperCase()}
               </a>
               <a
                 href="tel:+995599808202"
-                className="group inline-flex items-center gap-3 border border-primary/30 px-7 py-3.5 text-[12px] tracking-[0.22em] text-primary transition-colors hover:border-primary"
+                className="group inline-flex items-center gap-3 border border-primary-foreground/30 px-7 py-3.5 text-[12px] tracking-[0.22em] text-primary-foreground transition-colors hover:border-primary-foreground"
               >
                 <Phone className="h-3.5 w-3.5 text-gold" strokeWidth={1.5} />
                 {t("call").toUpperCase()}
@@ -413,8 +443,8 @@ function Hero({ lang }: { lang: Lang }) {
           </Reveal>
 
           <Reveal delay={0.5}>
-            <div className="mt-12 flex items-center gap-4 text-[12px] tracking-[0.18em] text-muted-foreground">
-              <span className="hairline" />
+            <div className="mt-12 flex items-center gap-4 text-[12px] tracking-[0.18em] text-primary-foreground/60">
+              <span className="hairline" style={{ background: "var(--gold)" }} />
               <span>{t("hero_rating")}</span>
             </div>
           </Reveal>
@@ -422,9 +452,9 @@ function Hero({ lang }: { lang: Lang }) {
 
         {/* Hero image */}
         <div className="lg:col-span-6">
-          <motion.div style={{ y }} className="relative">
+          <motion.div style={{ y }} className="relative lg:-mt-16">
             <div
-              className="w-full overflow-hidden border border-border/80"
+              className="w-full overflow-hidden border-[6px] border-background shadow-[0_30px_60px_-20px_rgba(10,30,60,0.45)]"
               style={{ aspectRatio: "4 / 5" }}
             >
               <img
@@ -432,23 +462,6 @@ function Hero({ lang }: { lang: Lang }) {
                 alt={lang === "ka" ? "პაციენტი და ექიმი კლინიკაში" : "Patient and doctor at the clinic"}
                 className="h-full w-full object-cover object-[50%_22%]"
               />
-            </div>
-            {/* Decorative gold frame offset */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute -bottom-4 -right-4 -z-10 h-full w-full border border-gold/50"
-            />
-            {/* Small caption block */}
-            <div className="absolute bottom-6 left-6 max-w-[220px] border-t border-gold/70 bg-background/85 px-5 py-4 backdrop-blur-sm">
-              <p
-                className="text-sm leading-snug text-primary"
-                style={{ fontFamily: "var(--font-serif)" }}
-              >
-                {lang === "ka" ? "დახვეწილი გარემო" : "A refined space"}
-              </p>
-              <p className="mt-1 text-[11px] tracking-[0.2em] text-muted-foreground">
-                {lang === "ka" ? "თბილისი · 2015" : "TBILISI · EST. 2015"}
-              </p>
             </div>
           </motion.div>
         </div>

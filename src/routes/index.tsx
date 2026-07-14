@@ -794,7 +794,7 @@ function Team({ lang }: { lang: Lang }) {
       </div>
 
       {/* Supporting team */}
-      <div className="mt-24 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:mx-auto lg:max-w-2xl">
+      <div className="mt-24 grid grid-cols-1 gap-10 sm:grid-cols-2">
         {[
           { n: "team_2_name", r: "team_2_role", b: "team_2_bio", img: "/img/salome.png" },
           { n: "team_3_name", r: "team_3_role", b: "team_3_bio", img: null },
@@ -802,7 +802,7 @@ function Team({ lang }: { lang: Lang }) {
           <Reveal key={m.n} delay={i * 0.1}>
             <div className="group">
               {m.img ? (
-                <div className="w-full overflow-hidden border border-border/80" style={{ aspectRatio: "5 / 6" }}>
+                <div className="aspect-[5/6] w-full overflow-hidden border border-border/80 lg:aspect-[4/3.4]">
                   <img
                     src={m.img}
                     alt={t(m.n as TranslationKey)}
@@ -810,7 +810,11 @@ function Team({ lang }: { lang: Lang }) {
                   />
                 </div>
               ) : (
-                <ImagePlaceholder ratio="5 / 6" label={lang === "ka" ? "პორტრეტი" : "Portrait"} />
+                <div className="img-placeholder group aspect-[5/6] lg:aspect-[4/3.4]">
+                  <div className="img-placeholder-inner transition-transform duration-[900ms] group-hover:scale-[1.03]">
+                    <span>{lang === "ka" ? "პორტრეტი" : "Portrait"}</span>
+                  </div>
+                </div>
               )}
               <div className="mt-6 flex items-start justify-between gap-4 border-t border-border pt-5">
                 <div>

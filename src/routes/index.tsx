@@ -391,7 +391,7 @@ function Hero({ lang }: { lang: Lang }) {
           height: "clamp(680px, 88vh, 980px)",
           background:
             "linear-gradient(155deg, oklch(0.32 0.08 240) 0%, oklch(0.5 0.135 240) 55%, oklch(0.44 0.11 235) 100%)",
-          clipPath: "polygon(0 0, 100% 0, 100% 82%, 0 100%)",
+          clipPath: "polygon(0 0, 100% 0, 100% 88%, 0 96%)",
         }}
       />
       <div
@@ -401,7 +401,7 @@ function Hero({ lang }: { lang: Lang }) {
           height: "clamp(680px, 88vh, 980px)",
           background:
             "radial-gradient(45% 55% at 88% 12%, oklch(0.72 0.09 85 / 0.35), transparent 70%)",
-          clipPath: "polygon(0 0, 100% 0, 100% 82%, 0 100%)",
+          clipPath: "polygon(0 0, 100% 0, 100% 88%, 0 96%)",
         }}
       />
 
@@ -794,7 +794,7 @@ function Team({ lang }: { lang: Lang }) {
       </div>
 
       {/* Supporting team */}
-      <div className="mt-24 grid grid-cols-1 gap-10 sm:grid-cols-2">
+      <div className="mt-24 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:mx-auto lg:max-w-2xl">
         {[
           { n: "team_2_name", r: "team_2_role", b: "team_2_bio", img: "/img/salome.png" },
           { n: "team_3_name", r: "team_3_role", b: "team_3_bio", img: null },

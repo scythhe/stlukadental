@@ -446,7 +446,7 @@ function Hero({ lang }: { lang: Lang }) {
           </Reveal>
 
           <Reveal delay={0.5}>
-            <div className="mt-12 flex items-center gap-4 text-[12px] tracking-[0.18em] text-primary-foreground/60">
+            <div className="mt-12 flex items-center gap-4 text-[12px] tracking-[0.18em] text-gold">
               <span className="hairline" style={{ background: "var(--gold)" }} />
               <span>{t("hero_rating")}</span>
             </div>
@@ -475,7 +475,7 @@ function Hero({ lang }: { lang: Lang }) {
                 {lang === "ka" ? "ყველაზე თბილი გარემო" : "The warmest environment"}
               </p>
               <p className="mt-1 text-[11px] tracking-[0.2em] text-muted-foreground">
-                {lang === "ka" ? "თბილისი · 2015" : "TBILISI · EST. 2015"}
+                {lang === "ka" ? "თბილისი · EST. 2015" : "TBILISI · EST. 2015"}
               </p>
             </div>
           </motion.div>

@@ -179,10 +179,13 @@ function Monogram({ className = "" }: { className?: string }) {
   return (
     <span
       aria-hidden
-      className={`inline-flex h-9 w-9 items-center justify-center rounded-full border border-gold/60 text-gold ${className}`}
-      style={{ fontFamily: "var(--font-serif)" }}
+      className={`inline-flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full ${className}`}
     >
-      <span className="text-[15px] leading-none tracking-tight">SL</span>
+      <img
+        src="/img/logo-icon.jpg"
+        alt=""
+        className="h-full w-full scale-[1.55] object-cover object-[51%_53%]"
+      />
     </span>
   );
 }
@@ -228,7 +231,7 @@ function Header({
       <div className="mx-auto grid max-w-[1400px] grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-6 lg:grid-cols-3 lg:px-10">
         {/* Logo */}
         <a href="#top" className="flex min-w-0 items-center gap-3">
-          <Monogram className={scrolled ? "" : "border-primary-foreground/60! text-primary-foreground!"} />
+          <Monogram />
           <span className="min-w-0 truncate">
             <span
               className={`block truncate text-[13px] leading-tight sm:text-sm ${scrolled ? "text-foreground" : "text-primary-foreground"}`}
@@ -385,7 +388,7 @@ function Hero({ lang }: { lang: Lang }) {
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-0 -z-10"
         style={{
-          height: "clamp(680px, 94vh, 1120px)",
+          height: "clamp(680px, 88vh, 980px)",
           background:
             "linear-gradient(155deg, oklch(0.32 0.08 240) 0%, oklch(0.5 0.135 240) 55%, oklch(0.44 0.11 235) 100%)",
           clipPath: "polygon(0 0, 100% 0, 100% 82%, 0 100%)",
@@ -395,14 +398,14 @@ function Hero({ lang }: { lang: Lang }) {
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-0 -z-10 opacity-50"
         style={{
-          height: "clamp(680px, 94vh, 1120px)",
+          height: "clamp(680px, 88vh, 980px)",
           background:
             "radial-gradient(45% 55% at 88% 12%, oklch(0.72 0.09 85 / 0.35), transparent 70%)",
           clipPath: "polygon(0 0, 100% 0, 100% 82%, 0 100%)",
         }}
       />
 
-      <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-14 px-6 pb-32 lg:grid-cols-12 lg:gap-16 lg:px-10 lg:pb-44">
+      <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-14 px-6 pb-32 lg:grid-cols-12 lg:items-start lg:gap-16 lg:px-10 lg:pb-24">
         <div className="lg:col-span-6">
           <Reveal>
             <div className="flex items-center gap-3">
@@ -458,10 +461,22 @@ function Hero({ lang }: { lang: Lang }) {
               style={{ aspectRatio: "4 / 5" }}
             >
               <img
-                src="/img/interior-hero.jpg"
+                src="/img/interierhero.png"
                 alt={lang === "ka" ? "პაციენტი და ექიმი კლინიკაში" : "Patient and doctor at the clinic"}
-                className="h-full w-full object-cover object-[50%_22%]"
+                className="h-full w-full object-cover object-[50%_25%]"
               />
+            </div>
+            {/* Small caption block */}
+            <div className="absolute bottom-6 left-6 max-w-[220px] border-t border-gold/70 bg-background/95 px-5 py-4 backdrop-blur-sm">
+              <p
+                className="text-sm leading-snug text-primary"
+                style={{ fontFamily: "var(--font-serif)" }}
+              >
+                {lang === "ka" ? "ყველაზე თბილი გარემო" : "The warmest environment"}
+              </p>
+              <p className="mt-1 text-[11px] tracking-[0.2em] text-muted-foreground">
+                {lang === "ka" ? "თბილისი · 2015" : "TBILISI · EST. 2015"}
+              </p>
             </div>
           </motion.div>
         </div>
@@ -588,7 +603,13 @@ function WhyUs({ lang }: { lang: Lang }) {
         <div className="lg:col-span-6">
           <Reveal>
             <div className="relative">
-              <ImagePlaceholder ratio="5 / 6" label={lang === "ka" ? "სურათი / Interior" : "Image / Interior"} />
+              <div className="w-full overflow-hidden border border-border/80" style={{ aspectRatio: "5 / 6" }}>
+                <img
+                  src="/img/interier.jpg"
+                  alt={lang === "ka" ? "კლინიკის გუნდი მუშაობისას" : "The clinic team at work"}
+                  className="h-full w-full object-cover object-[50%_30%]"
+                />
+              </div>
               <div
                 aria-hidden
                 className="pointer-events-none absolute -bottom-4 -left-4 -z-10 h-full w-full border border-gold/50"
@@ -724,7 +745,7 @@ function Team({ lang }: { lang: Lang }) {
             <div className="relative">
               <div className="aspect-[4/5] w-full overflow-hidden border border-border/80">
                 <img
-                  src="/img/mikheil-bakhtadze.jpg"
+                  src="/img/mikheilbakhtadze.png"
                   alt={lang === "ka" ? "მიხეილ ბახტაძე" : "Mikheil Bakhtadze"}
                   className="h-full w-full object-cover"
                 />
@@ -775,12 +796,22 @@ function Team({ lang }: { lang: Lang }) {
       {/* Supporting team */}
       <div className="mt-24 grid grid-cols-1 gap-10 sm:grid-cols-2">
         {[
-          { n: "team_2_name", r: "team_2_role", b: "team_2_bio" },
-          { n: "team_3_name", r: "team_3_role", b: "team_3_bio" },
+          { n: "team_2_name", r: "team_2_role", b: "team_2_bio", img: "/img/salome.png" },
+          { n: "team_3_name", r: "team_3_role", b: "team_3_bio", img: null },
         ].map((m, i) => (
           <Reveal key={m.n} delay={i * 0.1}>
             <div className="group">
-              <ImagePlaceholder ratio="5 / 6" label={lang === "ka" ? "პორტრეტი" : "Portrait"} />
+              {m.img ? (
+                <div className="w-full overflow-hidden border border-border/80" style={{ aspectRatio: "5 / 6" }}>
+                  <img
+                    src={m.img}
+                    alt={t(m.n as TranslationKey)}
+                    className="h-full w-full object-cover object-[50%_20%] transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                  />
+                </div>
+              ) : (
+                <ImagePlaceholder ratio="5 / 6" label={lang === "ka" ? "პორტრეტი" : "Portrait"} />
+              )}
               <div className="mt-6 flex items-start justify-between gap-4 border-t border-border pt-5">
                 <div>
                   <h4
@@ -1147,7 +1178,7 @@ function Home() {
         <TrustBar lang={lang} />
         <Services lang={lang} />
         <WhyUs lang={lang} />
-        <BeforeAfter lang={lang} />
+        {/* <BeforeAfter lang={lang} /> — temporarily removed */}
         <Team lang={lang} />
         <Reviews lang={lang} />
         <Contact lang={lang} />

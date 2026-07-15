@@ -446,7 +446,7 @@ function Hero({ lang }: { lang: Lang }) {
           </Reveal>
 
           <Reveal delay={0.5}>
-            <div className="mt-12 flex items-center gap-4 text-[12px] tracking-[0.18em] text-gold">
+            <div className="mt-6 flex items-center gap-4 text-[12px] tracking-[0.18em] text-gold lg:mt-12">
               <span className="hairline" style={{ background: "var(--gold)" }} />
               <span>{t("hero_rating")}</span>
             </div>
@@ -797,7 +797,7 @@ function Team({ lang }: { lang: Lang }) {
       <div className="mt-24 grid grid-cols-1 gap-10 sm:grid-cols-2">
         {[
           { n: "team_2_name", r: "team_2_role", b: "team_2_bio", img: "/img/salome.png" },
-          { n: "team_3_name", r: "team_3_role", b: "team_3_bio", img: null },
+          { n: "team_3_name", r: "team_3_role", b: "team_3_bio", img: "/img/ani.png" },
         ].map((m, i) => (
           <Reveal key={m.n} delay={i * 0.1}>
             <div className="group">

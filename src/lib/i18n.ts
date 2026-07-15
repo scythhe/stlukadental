@@ -145,11 +145,11 @@ export const translations = {
     ka: "პაციენტების საყვარელი ექიმი — ცნობილია თავისი სითბოთი და ესთეტიური აღდგენისა და კარიესის მკურნალობის ზუსტი, დელიკატური მიდგომით.",
     en: "A patient favourite — known for her warmth and a precise, gentle approach to aesthetic restoration and cavity treatment.",
   },
-  team_3_name: { ka: "ჰიგიენისტი", en: "Hygienist" },
-  team_3_role: { ka: "ჰიგიენა და პროფილაქტიკა", en: "Hygiene & Prevention" },
+  team_3_name: { ka: "ანა", en: "Ana" },
+  team_3_role: { ka: "სტომატოლოგი-თერაპევტი", en: "Dentist-Therapist" },
   team_3_bio: {
-    ka: "დელიკატური პროფესიული წმენდა და პროფილაქტიკური რჩევა.",
-    en: "Gentle professional cleaning and preventive guidance.",
+    ka: "ყურადღებიანი და პასუხისმგებლიანი ექიმი — პაციენტებს უფასებს სიმშვიდე და დეტალებზე ორიენტირებული მკურნალობა კარიესისა და ძირხვევის თერაპიის დროს.",
+    en: "An attentive and dedicated doctor — patients value her calm manner and detail-oriented approach to cavity and root canal therapy.",
   },
 
   // Reviews

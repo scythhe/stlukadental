@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
-import { toast } from "sonner";
 import { motion, useScroll, useTransform } from "motion/react";
 import {
   Phone,
@@ -24,7 +23,10 @@ import { translations, type Lang, type TranslationKey } from "@/lib/i18n";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "წმინდა ლუკა მახარებლის სახელობის სტომატოლოგიური კლინიკა | St. Luke's Dental, Tbilisi" },
+      {
+        title:
+          "წმინდა ლუკა მახარებლის სახელობის სტომატოლოგიური კლინიკა | St. Luke's Dental, Tbilisi",
+      },
       {
         name: "description",
         content:
@@ -75,10 +77,7 @@ function ImagePlaceholder({
   className?: string;
 }) {
   return (
-    <div
-      className={`img-placeholder group ${className}`}
-      style={{ aspectRatio: ratio }}
-    >
+    <div className={`img-placeholder group ${className}`} style={{ aspectRatio: ratio }}>
       <div className="img-placeholder-inner transition-transform duration-[900ms] group-hover:scale-[1.03]">
         <span>{label}</span>
       </div>
@@ -194,13 +193,7 @@ function Monogram({ className = "" }: { className?: string }) {
 /* Header                                                              */
 /* ------------------------------------------------------------------ */
 
-function Header({
-  lang,
-  setLang,
-}: {
-  lang: Lang;
-  setLang: (l: Lang) => void;
-}) {
+function Header({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
   const t = useT(lang);
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -218,6 +211,12 @@ function Header({
     { key: "nav_team", href: "#team" },
     { key: "nav_reviews", href: "#reviews" },
     { key: "nav_contact", href: "#contact" },
+  ];
+
+  const langOptions: { code: Lang; label: string }[] = [
+    { code: "ka", label: "ქარ" },
+    { code: "en", label: "ENG" },
+    { code: "ru", label: "РУС" },
   ];
 
   return (
@@ -239,7 +238,9 @@ function Header({
             >
               {t("clinic_name_short")}
             </span>
-            <span className={`hidden text-[10px] uppercase tracking-[0.24em] sm:block ${scrolled ? "text-muted-foreground" : "text-primary-foreground/60"}`}>
+            <span
+              className={`hidden text-[10px] uppercase tracking-[0.24em] sm:block ${scrolled ? "text-muted-foreground" : "text-primary-foreground/60"}`}
+            >
               Tbilisi · Est.
             </span>
           </span>
@@ -252,7 +253,9 @@ function Header({
               key={l.href}
               href={l.href}
               className={`text-[13px] tracking-wide transition-colors ${
-                scrolled ? "text-foreground/75 hover:text-primary" : "text-primary-foreground/80 hover:text-primary-foreground"
+                scrolled
+                  ? "text-foreground/75 hover:text-primary"
+                  : "text-primary-foreground/80 hover:text-primary-foreground"
               }`}
             >
               {t(l.key)}
@@ -262,39 +265,33 @@ function Header({
 
         {/* Right cluster */}
         <div className="flex items-center justify-end gap-3">
-          <div className={`hidden items-center gap-1 border px-1 py-0.5 text-[11px] tracking-[0.2em] md:flex ${scrolled ? "border-border/70" : "border-primary-foreground/30"}`}>
-            <button
-              onClick={() => setLang("ka")}
-              className={`px-2 py-1 transition-colors ${
-                lang === "ka"
-                  ? "bg-primary text-primary-foreground"
-                  : scrolled
-                    ? "text-muted-foreground hover:text-foreground"
-                    : "text-primary-foreground/60 hover:text-primary-foreground"
-              }`}
-              aria-pressed={lang === "ka"}
-            >
-              ქარ
-            </button>
-            <button
-              onClick={() => setLang("en")}
-              className={`px-2 py-1 transition-colors ${
-                lang === "en"
-                  ? "bg-primary text-primary-foreground"
-                  : scrolled
-                    ? "text-muted-foreground hover:text-foreground"
-                    : "text-primary-foreground/60 hover:text-primary-foreground"
-              }`}
-              aria-pressed={lang === "en"}
-            >
-              ENG
-            </button>
+          <div
+            className={`hidden items-center gap-1 border px-1 py-0.5 text-[11px] tracking-[0.2em] md:flex ${scrolled ? "border-border/70" : "border-primary-foreground/30"}`}
+          >
+            {langOptions.map((l) => (
+              <button
+                key={l.code}
+                onClick={() => setLang(l.code)}
+                className={`px-2 py-1 transition-colors ${
+                  lang === l.code
+                    ? "bg-primary text-primary-foreground"
+                    : scrolled
+                      ? "text-muted-foreground hover:text-foreground"
+                      : "text-primary-foreground/60 hover:text-primary-foreground"
+                }`}
+                aria-pressed={lang === l.code}
+              >
+                {l.label}
+              </button>
+            ))}
           </div>
 
           <a
             href="tel:+995599808202"
             className={`hidden items-center gap-2 text-[13px] transition-colors md:inline-flex ${
-              scrolled ? "text-foreground/80 hover:text-primary" : "text-primary-foreground/85 hover:text-primary-foreground"
+              scrolled
+                ? "text-foreground/80 hover:text-primary"
+                : "text-primary-foreground/85 hover:text-primary-foreground"
             }`}
           >
             <Phone className="h-3.5 w-3.5 text-gold" strokeWidth={1.5} />
@@ -315,7 +312,9 @@ function Header({
           <button
             onClick={() => setOpen((o) => !o)}
             className={`inline-flex h-10 w-10 items-center justify-center border lg:hidden ${
-              scrolled ? "border-border text-foreground" : "border-primary-foreground/40 text-primary-foreground"
+              scrolled
+                ? "border-border text-foreground"
+                : "border-primary-foreground/40 text-primary-foreground"
             }`}
             aria-label="menu"
           >
@@ -340,22 +339,19 @@ function Header({
             ))}
             <div className="mt-4 flex items-center justify-between">
               <div className="flex items-center gap-1 border border-border px-1 py-0.5 text-[11px] tracking-[0.2em]">
-                <button
-                  onClick={() => setLang("ka")}
-                  className={`px-2 py-1 ${
-                    lang === "ka" ? "bg-primary text-primary-foreground" : "text-muted-foreground"
-                  }`}
-                >
-                  ქარ
-                </button>
-                <button
-                  onClick={() => setLang("en")}
-                  className={`px-2 py-1 ${
-                    lang === "en" ? "bg-primary text-primary-foreground" : "text-muted-foreground"
-                  }`}
-                >
-                  ENG
-                </button>
+                {langOptions.map((l) => (
+                  <button
+                    key={l.code}
+                    onClick={() => setLang(l.code)}
+                    className={`px-2 py-1 ${
+                      lang === l.code
+                        ? "bg-primary text-primary-foreground"
+                        : "text-muted-foreground"
+                    }`}
+                  >
+                    {l.label}
+                  </button>
+                ))}
               </div>
               <a
                 href="tel:+995599808202"
@@ -408,9 +404,17 @@ function Hero({ lang }: { lang: Lang }) {
       <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-14 px-6 pb-32 lg:grid-cols-12 lg:items-start lg:gap-16 lg:px-10 lg:pb-24">
         <div className="lg:col-span-6">
           <Reveal>
-            <div className="flex items-center gap-3">
+            <p className="text-[12px] leading-snug text-primary-foreground/55 italic">
+              {t("clinic_name_alt")}
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.05}>
+            <div className="mt-3 flex items-center gap-3">
               <span className="hairline" style={{ background: "var(--gold)" }} />
-              <span className="eyebrow" style={{ color: "var(--gold-soft)" }}>{t("hero_eyebrow")}</span>
+              <span className="eyebrow" style={{ color: "var(--gold-soft)" }}>
+                {t("hero_eyebrow")}
+              </span>
             </div>
           </Reveal>
 
@@ -462,7 +466,7 @@ function Hero({ lang }: { lang: Lang }) {
             >
               <img
                 src="/img/interierhero.png"
-                alt={lang === "ka" ? "პაციენტი და ექიმი კლინიკაში" : "Patient and doctor at the clinic"}
+                alt={t("hero_image_alt")}
                 className="h-full w-full object-cover object-[50%_25%]"
               />
             </div>
@@ -472,10 +476,10 @@ function Hero({ lang }: { lang: Lang }) {
                 className="text-sm leading-snug text-primary"
                 style={{ fontFamily: "var(--font-serif)" }}
               >
-                {lang === "ka" ? "ყველაზე თბილი გარემო" : "The warmest environment"}
+                {t("hero_caption_title")}
               </p>
               <p className="mt-1 text-[11px] tracking-[0.2em] text-muted-foreground">
-                {lang === "ka" ? "თბილისი · EST. 2015" : "TBILISI · EST. 2015"}
+                {t("hero_caption_sub")}
               </p>
             </div>
           </motion.div>
@@ -549,9 +553,7 @@ function Services({ lang }: { lang: Lang }) {
           </h2>
         </Reveal>
         <Reveal delay={0.2}>
-          <p className="mt-5 text-[15px] leading-relaxed text-foreground/70">
-            {t("services_sub")}
-          </p>
+          <p className="mt-5 text-[15px] leading-relaxed text-foreground/70">{t("services_sub")}</p>
         </Reveal>
       </div>
 
@@ -603,10 +605,13 @@ function WhyUs({ lang }: { lang: Lang }) {
         <div className="lg:col-span-6">
           <Reveal>
             <div className="relative">
-              <div className="w-full overflow-hidden border border-border/80" style={{ aspectRatio: "5 / 6" }}>
+              <div
+                className="w-full overflow-hidden border border-border/80"
+                style={{ aspectRatio: "5 / 6" }}
+              >
                 <img
                   src="/img/interier.jpg"
-                  alt={lang === "ka" ? "კლინიკის გუნდი მუშაობისას" : "The clinic team at work"}
+                  alt={t("whyus_image_alt")}
                   className="h-full w-full object-cover object-[50%_30%]"
                 />
               </div>
@@ -631,14 +636,10 @@ function WhyUs({ lang }: { lang: Lang }) {
             </h2>
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="mt-6 text-[15.5px] leading-relaxed text-foreground/70">
-              {t("why_p1")}
-            </p>
+            <p className="mt-6 text-[15.5px] leading-relaxed text-foreground/70">{t("why_p1")}</p>
           </Reveal>
           <Reveal delay={0.3}>
-            <p className="mt-4 text-[15.5px] leading-relaxed text-foreground/70">
-              {t("why_p2")}
-            </p>
+            <p className="mt-4 text-[15.5px] leading-relaxed text-foreground/70">{t("why_p2")}</p>
           </Reveal>
 
           <ul className="mt-10 space-y-4">
@@ -681,9 +682,7 @@ function BeforeAfter({ lang }: { lang: Lang }) {
             </h2>
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="mt-4 text-[14px] leading-relaxed text-foreground/65">
-              {t("ba_sub")}
-            </p>
+            <p className="mt-4 text-[14px] leading-relaxed text-foreground/65">{t("ba_sub")}</p>
           </Reveal>
         </div>
 
@@ -732,9 +731,7 @@ function Team({ lang }: { lang: Lang }) {
           </h2>
         </Reveal>
         <Reveal delay={0.2}>
-          <p className="mt-5 text-[15px] leading-relaxed text-foreground/70">
-            {t("team_sub")}
-          </p>
+          <p className="mt-5 text-[15px] leading-relaxed text-foreground/70">{t("team_sub")}</p>
         </Reveal>
       </div>
 
@@ -746,7 +743,7 @@ function Team({ lang }: { lang: Lang }) {
               <div className="aspect-[4/5] w-full overflow-hidden border border-border/80">
                 <img
                   src="/img/mikheilbakhtadze.png"
-                  alt={lang === "ka" ? "მიხეილ ბახტაძე" : "Mikheil Bakhtadze"}
+                  alt={t("team_1_name")}
                   className="h-full w-full object-cover"
                 />
               </div>
@@ -759,7 +756,7 @@ function Team({ lang }: { lang: Lang }) {
         </div>
         <div className="lg:col-span-7">
           <Reveal delay={0.1}>
-            <span className="eyebrow">{lang === "ka" ? "მფლობელი" : "Owner"}</span>
+            <span className="eyebrow">{t("team_owner_label")}</span>
             <h3
               className="mt-4 text-[clamp(1.8rem,3vw,2.6rem)] leading-[1.05] text-primary"
               style={{ fontFamily: "var(--font-serif)" }}
@@ -774,11 +771,7 @@ function Team({ lang }: { lang: Lang }) {
             </p>
             <div className="mt-8 flex items-center gap-4 text-[12px] tracking-[0.2em] text-muted-foreground">
               <span className="hairline" />
-              <span>
-                {lang === "ka"
-                  ? "30+ წელი გამოცდილება"
-                  : "30+ years of experience"}
-              </span>
+              <span>{t("team_experience")}</span>
             </div>
             <div className="mt-8">
               <a
@@ -812,7 +805,7 @@ function Team({ lang }: { lang: Lang }) {
               ) : (
                 <div className="img-placeholder group aspect-[5/6] lg:aspect-[4/3.4]">
                   <div className="img-placeholder-inner transition-transform duration-[900ms] group-hover:scale-[1.03]">
-                    <span>{lang === "ka" ? "პორტრეტი" : "Portrait"}</span>
+                    <span>{t("team_portrait_placeholder")}</span>
                   </div>
                 </div>
               )}
@@ -916,28 +909,32 @@ function Reviews({ lang }: { lang: Lang }) {
 /* Contact + Form                                                      */
 /* ------------------------------------------------------------------ */
 
+const CLINIC_WHATSAPP_NUMBER = "995599808202";
+
 function Contact({ lang }: { lang: Lang }) {
   const t = useT(lang);
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    (e.currentTarget as HTMLFormElement).reset();
-    toast.success(t("form_success"));
+    const data = new FormData(e.currentTarget);
+    const lines = [
+      [t("form_name"), data.get("name")],
+      [t("form_phone"), data.get("phone")],
+      [t("form_email"), data.get("email")],
+      [t("form_service"), data.get("service")],
+      [t("form_datetime"), data.get("datetime")],
+      [t("form_message"), data.get("message")],
+    ]
+      .filter(([, value]) => String(value ?? "").trim().length > 0)
+      .map(([label, value]) => `${label}: ${value}`);
+
+    const text = `${t("form_submit")}\n\n${lines.join("\n")}`;
+    window.location.href = `https://wa.me/${CLINIC_WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
   };
 
   const fieldCls =
     "w-full border-0 border-b border-border bg-transparent px-0 py-3 text-[15px] text-foreground placeholder:text-muted-foreground/70 focus:border-gold focus:outline-none focus:ring-0 transition-colors";
-  const labelCls =
-    "block text-[11px] uppercase tracking-[0.22em] text-muted-foreground";
-
-  const services: TranslationKey[] = [
-    "svc_1_t",
-    "svc_2_t",
-    "svc_3_t",
-    "svc_4_t",
-    "svc_5_t",
-    "svc_6_t",
-  ];
+  const labelCls = "block text-[11px] uppercase tracking-[0.22em] text-muted-foreground";
 
   return (
     <section id="contact" className="bg-ivory">
@@ -977,26 +974,27 @@ function Contact({ lang }: { lang: Lang }) {
               </div>
               <div className="sm:col-span-1">
                 <label className={labelCls}>{t("form_service")}</label>
-                <select className={fieldCls} name="service" defaultValue="">
-                  <option value="" disabled>
-                    {t("form_service_placeholder")}
-                  </option>
-                  {services.map((s) => (
-                    <option key={s} value={t(s)}>
-                      {t(s)}
-                    </option>
-                  ))}
-                </select>
+                <input
+                  className={fieldCls}
+                  type="text"
+                  name="service"
+                  placeholder={t("form_service_placeholder")}
+                />
               </div>
               <div className="sm:col-span-2">
                 <label className={labelCls}>{t("form_datetime")}</label>
-                <input className={fieldCls} type="text" name="datetime" placeholder={lang === "ka" ? "მაგ. 12 მარტი, 15:00" : "e.g. March 12, 3:00 PM"} />
+                <input
+                  className={fieldCls}
+                  type="text"
+                  name="datetime"
+                  placeholder={t("form_datetime_placeholder")}
+                />
               </div>
               <div className="sm:col-span-2">
                 <label className={labelCls}>{t("form_message")}</label>
                 <textarea className={fieldCls} name="message" rows={3} />
               </div>
-              <div className="sm:col-span-2 pt-2">
+              <div className="flex flex-wrap items-center gap-4 pt-2 sm:col-span-2">
                 <button
                   type="submit"
                   className="group inline-flex items-center gap-3 border border-primary bg-primary px-8 py-3.5 text-[12px] tracking-[0.22em] text-primary-foreground transition-all hover:bg-transparent hover:text-primary"
@@ -1004,6 +1002,13 @@ function Contact({ lang }: { lang: Lang }) {
                   <Calendar className="h-3.5 w-3.5" strokeWidth={1.5} />
                   {t("form_submit").toUpperCase()}
                 </button>
+                <a
+                  href="tel:+995599808202"
+                  className="group inline-flex items-center gap-3 border border-primary/30 px-8 py-3.5 text-[12px] tracking-[0.22em] text-primary transition-all hover:border-primary"
+                >
+                  <Phone className="h-3.5 w-3.5 text-gold" strokeWidth={1.5} />
+                  {t("call").toUpperCase()}
+                </a>
               </div>
             </form>
           </Reveal>
@@ -1104,9 +1109,7 @@ function Footer({ lang }: { lang: Lang }) {
         </div>
 
         <div className="md:col-span-3">
-          <div className="text-[11px] uppercase tracking-[0.22em] text-gold">
-            {t("footer_nav")}
-          </div>
+          <div className="text-[11px] uppercase tracking-[0.22em] text-gold">{t("footer_nav")}</div>
           <ul className="mt-5 space-y-2.5 text-[14px] text-foreground/75">
             {[
               { k: "nav_services", h: "#services" },

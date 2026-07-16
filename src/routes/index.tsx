@@ -227,9 +227,12 @@ function Header({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
           : "bg-transparent py-5"
       }`}
     >
-      <div className="mx-auto grid max-w-[1400px] grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-6 lg:grid-cols-3 lg:px-10">
+      <div className="mx-auto grid max-w-[1400px] grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-6 lg:grid-cols-[auto_1fr_auto] lg:gap-8 lg:px-10">
         {/* Logo */}
-        <a href="#top" className="flex min-w-0 items-center gap-3">
+        <a
+          href="#top"
+          className="flex min-w-0 items-center gap-3 lg:max-w-[220px] xl:max-w-[280px]"
+        >
           <Monogram />
           <span className="min-w-0 truncate">
             <span
@@ -247,12 +250,12 @@ function Header({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
         </a>
 
         {/* Desktop nav */}
-        <nav className="hidden justify-center gap-8 lg:flex">
+        <nav className="hidden justify-center gap-5 lg:flex xl:gap-8">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className={`text-[13px] tracking-wide transition-colors ${
+              className={`whitespace-nowrap text-[13px] tracking-wide transition-colors ${
                 scrolled
                   ? "text-foreground/75 hover:text-primary"
                   : "text-primary-foreground/80 hover:text-primary-foreground"

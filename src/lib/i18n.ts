@@ -13,8 +13,8 @@ export const translations = {
 
   clinic_name_short: {
     ka: "წმინდა ლუკა მახარებლის სახელობის კლინიკა",
-    en: "St. Luke's Dental Clinic",
-    ru: "Клиника Святого Луки",
+    en: "St. Luke the Evangelist Dental Clinic",
+    ru: "Стоматологическая клиника имени Святого Луки",
   },
   clinic_name_full: {
     ka: "წმინდა ლუკა მახარებლის სახელობის სტომატოლოგიური კლინიკა",

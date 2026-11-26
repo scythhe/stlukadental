@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import {
   Phone,
@@ -13,12 +13,25 @@ import {
   Crown,
   MapPin,
   Clock,
-  Mail,
   Menu,
   X,
   Quote,
+  Award,
+  Facebook,
+  Plane,
+  Hotel,
+  Video,
+  FileText,
+  Globe,
+  Mail,
 } from "lucide-react";
 import { translations, type Lang, type TranslationKey } from "@/lib/i18n";
+
+const PHONE_HREF = "tel:+995544144448";
+const PHONE_DISPLAY = "+995 544 144 448";
+const PHONE_SHORT = "544 144 448";
+const FACEBOOK_CHAT_URL = "https://m.me/St.LukaDentalClinic";
+const FACEBOOK_PAGE_URL = "https://www.facebook.com/St.LukaDentalClinic/";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -30,7 +43,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "მზრუნველი, უმტკივნეულო სტომატოლოგია თბილისის გულში — მიხეილ ბახტაძის გუნდი. Painless, refined dentistry in the heart of Tbilisi.",
+          "სტომატოლოგია და იმპლანტაცია თბილისში — 25 წელზე მეტი გამოცდილება. Dentistry and dental implants in Tbilisi, with over 25 years of experience.",
       },
     ],
   }),
@@ -209,6 +222,7 @@ function Header({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
     { key: "nav_services", href: "#services" },
     { key: "nav_about", href: "#about" },
     { key: "nav_team", href: "#team" },
+    { key: "nav_tourism", href: "#tourism" },
     { key: "nav_reviews", href: "#reviews" },
     { key: "nav_contact", href: "#contact" },
   ];
@@ -244,7 +258,7 @@ function Header({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
             <span
               className={`hidden text-[10px] uppercase tracking-[0.24em] sm:block ${scrolled ? "text-muted-foreground" : "text-primary-foreground/60"}`}
             >
-              Tbilisi · Est.
+              Tbilisi · Sololaki
             </span>
           </span>
         </a>
@@ -290,15 +304,15 @@ function Header({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
           </div>
 
           <a
-            href="tel:+995599808202"
-            className={`hidden items-center gap-2 text-[13px] transition-colors md:inline-flex ${
+            href={PHONE_HREF}
+            className={`hidden items-center gap-2 whitespace-nowrap text-[13px] transition-colors 2xl:inline-flex ${
               scrolled
                 ? "text-foreground/80 hover:text-primary"
                 : "text-primary-foreground/85 hover:text-primary-foreground"
             }`}
           >
             <Phone className="h-3.5 w-3.5 text-gold" strokeWidth={1.5} />
-            599 80 82 02
+            {PHONE_SHORT}
           </a>
 
           <a
@@ -357,10 +371,10 @@ function Header({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
                 ))}
               </div>
               <a
-                href="tel:+995599808202"
+                href={PHONE_HREF}
                 className="inline-flex items-center gap-2 text-sm text-foreground"
               >
-                <Phone className="h-3.5 w-3.5 text-gold" strokeWidth={1.5} /> 599 80 82 02
+                <Phone className="h-3.5 w-3.5 text-gold" strokeWidth={1.5} /> {PHONE_SHORT}
               </a>
             </div>
           </div>
@@ -385,9 +399,8 @@ function Hero({ lang }: { lang: Lang }) {
       {/* Full-bleed dark panel with angled bottom edge */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 -z-10"
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[calc(100%-300px)] lg:h-[clamp(680px,88vh,980px)]"
         style={{
-          height: "clamp(680px, 88vh, 980px)",
           background:
             "linear-gradient(155deg, oklch(0.32 0.08 240) 0%, oklch(0.5 0.135 240) 55%, oklch(0.44 0.11 235) 100%)",
           clipPath: "polygon(0 0, 100% 0, 100% 88%, 0 96%)",
@@ -395,9 +408,8 @@ function Hero({ lang }: { lang: Lang }) {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 -z-10 opacity-50"
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[calc(100%-300px)] opacity-50 lg:h-[clamp(680px,88vh,980px)]"
         style={{
-          height: "clamp(680px, 88vh, 980px)",
           background:
             "radial-gradient(45% 55% at 88% 12%, oklch(0.72 0.09 85 / 0.35), transparent 70%)",
           clipPath: "polygon(0 0, 100% 0, 100% 88%, 0 96%)",
@@ -443,7 +455,7 @@ function Hero({ lang }: { lang: Lang }) {
                 {t("book").toUpperCase()}
               </a>
               <a
-                href="tel:+995599808202"
+                href={PHONE_HREF}
                 className="group inline-flex items-center gap-3 border border-primary-foreground/30 px-7 py-3.5 text-[12px] tracking-[0.22em] text-primary-foreground transition-colors hover:border-primary-foreground"
               >
                 <Phone className="h-3.5 w-3.5 text-gold" strokeWidth={1.5} />
@@ -468,13 +480,13 @@ function Hero({ lang }: { lang: Lang }) {
               style={{ aspectRatio: "4 / 5" }}
             >
               <img
-                src="/img/interierhero.png"
+                src="/img/cabinet.jpg"
                 alt={t("hero_image_alt")}
-                className="h-full w-full object-cover object-[50%_25%]"
+                className="h-full w-full object-cover object-[55%_50%]"
               />
             </div>
             {/* Small caption block */}
-            <div className="absolute bottom-6 left-6 max-w-[220px] border-t border-gold/70 bg-background/95 px-5 py-4 backdrop-blur-sm">
+            <div className="absolute bottom-6 left-6 max-w-[260px] border-t border-gold/70 bg-background/95 px-5 py-4 backdrop-blur-sm">
               <p
                 className="text-sm leading-snug text-primary"
                 style={{ fontFamily: "var(--font-serif)" }}
@@ -499,9 +511,9 @@ function Hero({ lang }: { lang: Lang }) {
 function TrustBar({ lang }: { lang: Lang }) {
   const t = useT(lang);
   const items = [
-    { icon: Shield, label: t("trust_1") },
+    { icon: Award, label: t("trust_1") },
     { icon: HeartHandshake, label: t("trust_2") },
-    { icon: Sparkles, label: t("trust_3") },
+    { icon: Shield, label: t("trust_3") },
     { icon: Languages, label: t("trust_4"), sub: t("trust_4_sub") },
   ];
   return (
@@ -600,7 +612,6 @@ function Services({ lang }: { lang: Lang }) {
 
 function WhyUs({ lang }: { lang: Lang }) {
   const t = useT(lang);
-  const bullets: TranslationKey[] = ["why_b1", "why_b2", "why_b3", "why_b4"];
 
   return (
     <section id="about" className="bg-ivory">
@@ -610,18 +621,29 @@ function WhyUs({ lang }: { lang: Lang }) {
             <div className="relative">
               <div
                 className="w-full overflow-hidden border border-border/80"
-                style={{ aspectRatio: "5 / 6" }}
+                style={{ aspectRatio: "4 / 3" }}
               >
                 <img
-                  src="/img/interier.jpg"
+                  src="/img/certificates.jpg"
                   alt={t("whyus_image_alt")}
-                  className="h-full w-full object-cover object-[50%_30%]"
+                  className="h-full w-full object-cover"
                 />
               </div>
               <div
                 aria-hidden
                 className="pointer-events-none absolute -bottom-4 -left-4 -z-10 h-full w-full border border-gold/50"
               />
+              <div className="absolute right-4 -bottom-6 max-w-[240px] border-t border-gold/70 bg-background/95 px-5 py-4 shadow-[0_12px_30px_-12px_rgba(10,30,60,0.35)] sm:right-6">
+                <p
+                  className="text-sm leading-snug text-primary"
+                  style={{ fontFamily: "var(--font-serif)" }}
+                >
+                  {t("why_cert_caption")}
+                </p>
+                <p className="mt-1 text-[10px] tracking-[0.18em] text-muted-foreground">
+                  {t("why_cert_caption_sub")}
+                </p>
+              </div>
             </div>
           </Reveal>
         </div>
@@ -638,23 +660,23 @@ function WhyUs({ lang }: { lang: Lang }) {
               {t("why_title")}
             </h2>
           </Reveal>
+          <Reveal delay={0.15}>
+            <p
+              className="mt-6 border-l-2 border-gold pl-5 text-[18px] leading-snug text-primary"
+              style={{ fontFamily: "var(--font-serif)" }}
+            >
+              {t("why_lead")}
+            </p>
+          </Reveal>
           <Reveal delay={0.2}>
             <p className="mt-6 text-[15.5px] leading-relaxed text-foreground/70">{t("why_p1")}</p>
           </Reveal>
-          <Reveal delay={0.3}>
+          <Reveal delay={0.25}>
             <p className="mt-4 text-[15.5px] leading-relaxed text-foreground/70">{t("why_p2")}</p>
           </Reveal>
-
-          <ul className="mt-10 space-y-4">
-            {bullets.map((k, i) => (
-              <Reveal key={k} delay={0.3 + i * 0.08}>
-                <li className="flex items-start gap-4 border-t border-border/70 pt-4">
-                  <span className="mt-2 h-px w-6 shrink-0 bg-gold" />
-                  <span className="text-[14.5px] text-foreground/85">{t(k)}</span>
-                </li>
-              </Reveal>
-            ))}
-          </ul>
+          <Reveal delay={0.3}>
+            <p className="mt-4 text-[15.5px] leading-relaxed text-foreground/85">{t("why_p3")}</p>
+          </Reveal>
         </div>
       </div>
     </section>
@@ -745,9 +767,9 @@ function Team({ lang }: { lang: Lang }) {
             <div className="relative">
               <div className="aspect-[4/5] w-full overflow-hidden border border-border/80">
                 <img
-                  src="/img/mikheilbakhtadze.png"
+                  src="/img/mikheilbakhtadze.jpg"
                   alt={t("team_1_name")}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover object-top"
                 />
               </div>
               <div
@@ -792,26 +814,18 @@ function Team({ lang }: { lang: Lang }) {
       {/* Supporting team */}
       <div className="mt-24 grid grid-cols-1 gap-10 sm:grid-cols-2">
         {[
-          { n: "team_2_name", r: "team_2_role", b: "team_2_bio", img: "/img/salome.png" },
-          { n: "team_3_name", r: "team_3_role", b: "team_3_bio", img: "/img/ani.png" },
+          { n: "team_2_name", r: "team_2_role", img: "/img/salome.png" },
+          { n: "team_3_name", r: "team_3_role", img: "/img/ani.png" },
         ].map((m, i) => (
           <Reveal key={m.n} delay={i * 0.1}>
             <div className="group">
-              {m.img ? (
-                <div className="aspect-[5/6] w-full overflow-hidden border border-border/80 lg:aspect-[4/3.4]">
-                  <img
-                    src={m.img}
-                    alt={t(m.n as TranslationKey)}
-                    className="h-full w-full object-cover object-[50%_20%] transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                  />
-                </div>
-              ) : (
-                <div className="img-placeholder group aspect-[5/6] lg:aspect-[4/3.4]">
-                  <div className="img-placeholder-inner transition-transform duration-[900ms] group-hover:scale-[1.03]">
-                    <span>{t("team_portrait_placeholder")}</span>
-                  </div>
-                </div>
-              )}
+              <div className="aspect-[5/6] w-full overflow-hidden border border-border/80 lg:aspect-[4/3.4]">
+                <img
+                  src={m.img}
+                  alt={t(m.n as TranslationKey)}
+                  className="h-full w-full object-cover object-[50%_20%] transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                />
+              </div>
               <div className="mt-6 flex items-start justify-between gap-4 border-t border-border pt-5">
                 <div>
                   <h4
@@ -825,12 +839,234 @@ function Team({ lang }: { lang: Lang }) {
                   </p>
                 </div>
               </div>
-              <p className="mt-4 text-[13.5px] leading-relaxed text-foreground/65">
-                {t(m.b as TranslationKey)}
-              </p>
             </div>
           </Reveal>
         ))}
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Dental tourism + hotel                                              */
+/* ------------------------------------------------------------------ */
+
+function Tourism({ lang }: { lang: Lang }) {
+  const t = useT(lang);
+  const features = [
+    { icon: Video, k: "tour_f1" },
+    { icon: FileText, k: "tour_f2" },
+    { icon: Hotel, k: "tour_f3" },
+    { icon: Plane, k: "tour_f4" },
+  ] as const;
+  const steps = [
+    { t: "tour_s1_t", d: "tour_s1_d" },
+    { t: "tour_s2_t", d: "tour_s2_d" },
+    { t: "tour_s3_t", d: "tour_s3_d" },
+    { t: "tour_s4_t", d: "tour_s4_d" },
+    { t: "tour_s5_t", d: "tour_s5_d" },
+  ] as const;
+  const rooms = [
+    { k: "hotel_room_1", guests: "2", nobf: 50, bf: 65 },
+    { k: "hotel_room_2", guests: "2", nobf: 60, bf: 75 },
+    { k: "hotel_room_3", guests: "3–4", nobf: 75, bf: 95 },
+  ] as const;
+
+  return (
+    <section id="tourism" className="bg-ivory">
+      <div className="mx-auto max-w-[1400px] px-6 py-28 lg:px-10 lg:py-36">
+        <div className="mx-auto max-w-2xl text-center">
+          <Reveal>
+            <div className="flex items-center justify-center gap-3">
+              <span className="hairline" />
+              <span className="eyebrow">{t("tour_eyebrow")}</span>
+              <span className="hairline" />
+            </div>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <h2 className="mt-6 text-[clamp(2rem,3.5vw,3rem)] leading-[1.1] text-primary">
+              {t("tour_title")}
+            </h2>
+          </Reveal>
+          <Reveal delay={0.2}>
+            <p className="mt-5 text-[15px] leading-relaxed text-foreground/70">{t("tour_sub")}</p>
+          </Reveal>
+        </div>
+
+        {/* Feature tiles */}
+        <Reveal delay={0.2}>
+          <div className="mt-14 grid grid-cols-2 gap-px border border-border/80 bg-border/80 lg:grid-cols-4">
+            {features.map(({ icon: Icon, k }) => (
+              <div
+                key={k}
+                className="flex flex-col items-center gap-3 bg-card px-4 py-7 text-center"
+              >
+                <Icon className="h-6 w-6 text-gold" strokeWidth={1.25} />
+                <span className="text-[13.5px] leading-snug text-foreground">{t(k)}</span>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
+        {/* Steps */}
+        <div className="mt-24 grid grid-cols-1 items-start gap-14 lg:grid-cols-12 lg:gap-20">
+          <div className="lg:sticky lg:top-28 lg:col-span-5">
+            <Reveal>
+              <div className="relative">
+                <div className="aspect-[4/3] w-full overflow-hidden border border-border/80 lg:aspect-[4/5]">
+                  <img
+                    src="/img/interier.jpg"
+                    alt={t("tour_image_alt")}
+                    className="h-full w-full object-cover object-[50%_35%]"
+                  />
+                </div>
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute -right-4 -bottom-4 -z-10 h-full w-full border border-gold/50"
+                />
+              </div>
+            </Reveal>
+          </div>
+
+          <div className="lg:col-span-7">
+            <Reveal>
+              <h3
+                className="text-[clamp(1.6rem,2.6vw,2.2rem)] leading-[1.1] text-primary"
+                style={{ fontFamily: "var(--font-serif)" }}
+              >
+                {t("tour_steps_title")}
+              </h3>
+            </Reveal>
+            <ol className="mt-8">
+              {steps.map((s, i) => (
+                <Reveal key={s.t} delay={i * 0.06}>
+                  <li className="grid grid-cols-[3rem_1fr] gap-4 border-t border-border/70 py-6 sm:grid-cols-[4rem_1fr]">
+                    <span
+                      className="text-[26px] leading-none text-gold sm:text-[30px]"
+                      style={{ fontFamily: "var(--font-serif)" }}
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div>
+                      <h4 className="text-[17px] leading-snug text-primary">{t(s.t)}</h4>
+                      <p className="mt-2 text-[14px] leading-relaxed text-foreground/70">
+                        {t(s.d)}
+                      </p>
+                    </div>
+                  </li>
+                </Reveal>
+              ))}
+            </ol>
+            <Reveal>
+              <p className="border-t border-border/70 pt-5 text-[12.5px] leading-relaxed text-muted-foreground italic">
+                {t("tour_note")}
+              </p>
+              <a
+                href={FACEBOOK_CHAT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8 inline-flex items-center gap-3 border border-primary bg-primary px-7 py-3.5 text-[12px] tracking-[0.22em] text-primary-foreground transition-all hover:bg-transparent hover:text-primary"
+              >
+                <Facebook className="h-3.5 w-3.5" strokeWidth={1.5} />
+                {t("tour_cta").toUpperCase()}
+              </a>
+            </Reveal>
+          </div>
+        </div>
+
+        {/* Hotel */}
+        <Reveal>
+          <div className="mt-24 grid grid-cols-1 border border-border/80 bg-card lg:grid-cols-12">
+            <div className="border-b border-border/80 p-7 sm:p-10 lg:col-span-5 lg:border-r lg:border-b-0 lg:p-12">
+              <div className="flex items-center gap-3">
+                <Hotel className="h-4 w-4 text-gold" strokeWidth={1.5} />
+                <span className="eyebrow">{t("hotel_eyebrow")}</span>
+              </div>
+              <h3
+                className="mt-5 text-[clamp(1.8rem,3vw,2.4rem)] leading-[1.05] text-primary"
+                style={{ fontFamily: "var(--font-serif)" }}
+              >
+                Hotel Garnet
+              </h3>
+              <p className="mt-4 text-[15px] leading-relaxed text-foreground/75">
+                {t("hotel_sub")}
+              </p>
+              <p className="mt-4 text-[13.5px] leading-relaxed text-foreground/65">
+                {t("hotel_amenities")}
+              </p>
+              <p className="mt-6 text-[13px] leading-relaxed text-muted-foreground">
+                {t("hotel_separate")}
+              </p>
+              <ul className="mt-4 space-y-2.5 text-[14px]">
+                <li>
+                  <a
+                    href="https://hotelgarnet.ge"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-3 text-primary hover:text-gold"
+                  >
+                    <Globe className="h-4 w-4 text-gold" strokeWidth={1.25} />
+                    hotelgarnet.ge
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="mailto:reservation@hotelgarnet.ge"
+                    className="inline-flex items-center gap-3 break-all text-primary hover:text-gold"
+                  >
+                    <Mail className="h-4 w-4 shrink-0 text-gold" strokeWidth={1.25} />
+                    reservation@hotelgarnet.ge
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div className="p-7 sm:p-10 lg:col-span-7 lg:p-12">
+              <div className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+                {t("hotel_rates_caption")}
+              </div>
+              <table className="mt-5 w-full border-collapse text-left">
+                <thead>
+                  <tr className="border-b border-border text-[10.5px] uppercase tracking-[0.16em] text-muted-foreground">
+                    <th className="py-3 pr-3 font-normal">{t("hotel_col_room")}</th>
+                    <th className="hidden py-3 pr-3 font-normal sm:table-cell">
+                      {t("hotel_col_guests")}
+                    </th>
+                    <th className="py-3 pr-3 text-right font-normal">{t("hotel_col_nobf")}</th>
+                    <th className="py-3 text-right font-normal">{t("hotel_col_bf")}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {rooms.map((r) => (
+                    <tr key={r.k} className="border-b border-border/60">
+                      <td className="py-4 pr-3">
+                        <span
+                          className="block text-[15px] leading-snug text-primary sm:text-[17px]"
+                          style={{ fontFamily: "var(--font-serif)" }}
+                        >
+                          {t(r.k)}
+                        </span>
+                        <span className="mt-0.5 block text-[11.5px] text-muted-foreground sm:hidden">
+                          {t("hotel_col_guests")}: {r.guests}
+                        </span>
+                      </td>
+                      <td className="hidden py-4 pr-3 text-[14px] text-foreground/75 sm:table-cell">
+                        {r.guests}
+                      </td>
+                      <td className="py-4 pr-3 text-right text-[16px] text-foreground">
+                        ${r.nobf}
+                      </td>
+                      <td className="py-4 text-right text-[16px] text-foreground">${r.bf}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <p className="mt-6 text-[13px] leading-relaxed text-foreground/65">
+                {t("hotel_kids")}
+              </p>
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -912,37 +1148,15 @@ function Reviews({ lang }: { lang: Lang }) {
 /* Contact + Form                                                      */
 /* ------------------------------------------------------------------ */
 
-const CLINIC_WHATSAPP_NUMBER = "995599808202";
-
 function Contact({ lang }: { lang: Lang }) {
   const t = useT(lang);
-
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    const lines = [
-      [t("form_name"), data.get("name")],
-      [t("form_phone"), data.get("phone")],
-      [t("form_email"), data.get("email")],
-      [t("form_service"), data.get("service")],
-      [t("form_datetime"), data.get("datetime")],
-      [t("form_message"), data.get("message")],
-    ]
-      .filter(([, value]) => String(value ?? "").trim().length > 0)
-      .map(([label, value]) => `${label}: ${value}`);
-
-    const text = `${t("form_submit")}\n\n${lines.join("\n")}`;
-    window.location.href = `https://wa.me/${CLINIC_WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
-  };
-
-  const fieldCls =
-    "w-full border-0 border-b border-border bg-transparent px-0 py-3 text-[15px] text-foreground placeholder:text-muted-foreground/70 focus:border-gold focus:outline-none focus:ring-0 transition-colors";
-  const labelCls = "block text-[11px] uppercase tracking-[0.22em] text-muted-foreground";
+  const actionCls =
+    "group flex items-center gap-5 border border-border bg-card p-6 transition-all duration-300 hover:border-primary hover:shadow-[0_18px_40px_-16px_rgba(20,60,110,0.22)]";
 
   return (
     <section id="contact" className="bg-ivory">
       <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-16 px-6 py-28 lg:grid-cols-12 lg:gap-20 lg:px-10 lg:py-36">
-        {/* Left: form */}
+        {/* Left: contact actions */}
         <div className="lg:col-span-7">
           <Reveal>
             <div className="flex items-center gap-3">
@@ -962,58 +1176,45 @@ function Contact({ lang }: { lang: Lang }) {
           </Reveal>
 
           <Reveal delay={0.3}>
-            <form onSubmit={onSubmit} className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2">
-              <div className="sm:col-span-1">
-                <label className={labelCls}>{t("form_name")}</label>
-                <input required className={fieldCls} type="text" name="name" />
-              </div>
-              <div className="sm:col-span-1">
-                <label className={labelCls}>{t("form_phone")}</label>
-                <input required className={fieldCls} type="tel" name="phone" />
-              </div>
-              <div className="sm:col-span-1">
-                <label className={labelCls}>{t("form_email")}</label>
-                <input className={fieldCls} type="email" name="email" />
-              </div>
-              <div className="sm:col-span-1">
-                <label className={labelCls}>{t("form_service")}</label>
-                <input
-                  className={fieldCls}
-                  type="text"
-                  name="service"
-                  placeholder={t("form_service_placeholder")}
-                />
-              </div>
-              <div className="sm:col-span-2">
-                <label className={labelCls}>{t("form_datetime")}</label>
-                <input
-                  className={fieldCls}
-                  type="text"
-                  name="datetime"
-                  placeholder={t("form_datetime_placeholder")}
-                />
-              </div>
-              <div className="sm:col-span-2">
-                <label className={labelCls}>{t("form_message")}</label>
-                <textarea className={fieldCls} name="message" rows={3} />
-              </div>
-              <div className="flex flex-wrap items-center gap-4 pt-2 sm:col-span-2">
-                <button
-                  type="submit"
-                  className="group inline-flex items-center gap-3 border border-primary bg-primary px-8 py-3.5 text-[12px] tracking-[0.22em] text-primary-foreground transition-all hover:bg-transparent hover:text-primary"
-                >
-                  <Calendar className="h-3.5 w-3.5" strokeWidth={1.5} />
-                  {t("form_submit").toUpperCase()}
-                </button>
-                <a
-                  href="tel:+995599808202"
-                  className="group inline-flex items-center gap-3 border border-primary/30 px-8 py-3.5 text-[12px] tracking-[0.22em] text-primary transition-all hover:border-primary"
-                >
-                  <Phone className="h-3.5 w-3.5 text-gold" strokeWidth={1.5} />
-                  {t("call").toUpperCase()}
-                </a>
-              </div>
-            </form>
+            <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <a
+                href={FACEBOOK_CHAT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={actionCls}
+              >
+                <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                  <Facebook className="h-5 w-5" strokeWidth={1.5} />
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+                    Facebook
+                  </span>
+                  <span
+                    className="mt-1 block text-[17px] leading-snug text-primary"
+                    style={{ fontFamily: "var(--font-serif)" }}
+                  >
+                    {t("contact_fb_label")}
+                  </span>
+                </span>
+              </a>
+              <a href={PHONE_HREF} className={actionCls}>
+                <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-gold/70 text-gold">
+                  <Phone className="h-5 w-5" strokeWidth={1.5} />
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+                    {t("contact_call_label")}
+                  </span>
+                  <span
+                    className="mt-1 block text-[17px] leading-snug whitespace-nowrap text-primary"
+                    style={{ fontFamily: "var(--font-serif)" }}
+                  >
+                    {PHONE_DISPLAY}
+                  </span>
+                </span>
+              </a>
+            </div>
           </Reveal>
         </div>
 
@@ -1040,10 +1241,10 @@ function Contact({ lang }: { lang: Lang }) {
                       {t("contact_phone_label")}
                     </div>
                     <a
-                      href="tel:+995599808202"
+                      href={PHONE_HREF}
                       className="mt-1 block text-[15px] text-foreground hover:text-primary"
                     >
-                      +995 599 80 82 02
+                      {PHONE_DISPLAY}
                     </a>
                   </div>
                 </li>
@@ -1118,6 +1319,7 @@ function Footer({ lang }: { lang: Lang }) {
               { k: "nav_services", h: "#services" },
               { k: "nav_about", h: "#about" },
               { k: "nav_team", h: "#team" },
+              { k: "nav_tourism", h: "#tourism" },
               { k: "nav_reviews", h: "#reviews" },
               { k: "nav_contact", h: "#contact" },
             ].map((l) => (
@@ -1141,8 +1343,8 @@ function Footer({ lang }: { lang: Lang }) {
             </li>
             <li className="flex items-start gap-3">
               <Phone className="mt-0.5 h-4 w-4 shrink-0 text-gold" strokeWidth={1.25} />
-              <a href="tel:+995599808202" className="hover:text-primary">
-                +995 599 80 82 02
+              <a href={PHONE_HREF} className="hover:text-primary">
+                {PHONE_DISPLAY}
               </a>
             </li>
             <li className="flex items-start gap-3">
@@ -1150,8 +1352,15 @@ function Footer({ lang }: { lang: Lang }) {
               <span>{t("contact_hours")}</span>
             </li>
             <li className="flex items-start gap-3">
-              <Mail className="mt-0.5 h-4 w-4 shrink-0 text-gold" strokeWidth={1.25} />
-              <span>info@stlukedental.ge</span>
+              <Facebook className="mt-0.5 h-4 w-4 shrink-0 text-gold" strokeWidth={1.25} />
+              <a
+                href={FACEBOOK_PAGE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary"
+              >
+                St. Luka Dental Clinic
+              </a>
             </li>
           </ul>
         </div>
@@ -1190,6 +1399,7 @@ function Home() {
         <WhyUs lang={lang} />
         {/* <BeforeAfter lang={lang} /> — temporarily removed */}
         <Team lang={lang} />
+        <Tourism lang={lang} />
         <Reviews lang={lang} />
         <Contact lang={lang} />
       </main>
@@ -1197,7 +1407,7 @@ function Home() {
 
       {/* Mobile floating call button */}
       <a
-        href="tel:+995599808202"
+        href={PHONE_HREF}
         aria-label="Call clinic"
         className="fixed bottom-5 right-5 z-40 inline-flex h-12 w-12 items-center justify-center rounded-full border border-gold/60 bg-primary text-primary-foreground shadow-lg transition-transform hover:scale-105 sm:hidden"
       >

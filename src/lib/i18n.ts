@@ -128,11 +128,6 @@ export const translations = {
     en: "International certificates",
     ru: "Международные сертификаты",
   },
-  why_cert_caption_sub: {
-    ka: "თურქეთი · პოლონეთი · ევროპა · საქართველო",
-    en: "TURKEY · POLAND · EUROPE · GEORGIA",
-    ru: "ТУРЦИЯ · ПОЛЬША · ЕВРОПА · ГРУЗИЯ",
-  },
   why_eyebrow: { ka: "ჩვენ შესახებ", en: "About Us", ru: "О нас" },
   why_title: {
     ka: "კეთილი იყოს თქვენი მობრძანება ჩვენს კლინიკაში!",
@@ -183,12 +178,6 @@ export const translations = {
     en: "Doctors who give every patient their time and attention.",
     ru: "Врачи, которые уделяют каждому пациенту время и внимание.",
   },
-  team_owner_label: { ka: "მფლობელი", en: "Owner", ru: "Владелец" },
-  team_experience: {
-    ka: "25+ წელი გამოცდილება",
-    en: "25+ years of experience",
-    ru: "25+ лет опыта",
-  },
   team_1_name: { ka: "მიხეილ ბახტაძე", en: "Mikheil Bakhtadze", ru: "Михеил Бахтадзе" },
   team_1_role: {
     ka: "მთავარი ექიმი, იმპლანტოლოგი",
@@ -196,9 +185,9 @@ export const translations = {
     ru: "Главный врач, имплантолог",
   },
   team_1_bio: {
-    ka: "იმპლანტოლოგი 25 წელზე მეტი გამოცდილებით დენტალურ იმპლანტაციაში, პროთეზირებასა და კომპლექსურ სტომატოლოგიურ მკურნალობაში. კვალიფიკაციის ამაღლების კურსები გავლილი აქვს საქართველოში, თურქეთში, პოლონეთსა და ევროპის სხვა ქვეყნებში.",
-    en: "Implantologist with more than 25 years of experience in dental implants, prosthetics and comprehensive dental care. He has completed professional training in Georgia, Turkey, Poland and other European countries.",
-    ru: "Имплантолог с опытом более 25 лет в дентальной имплантации, протезировании и комплексном лечении зубов. Проходил профессиональное обучение в Грузии, Турции, Польше и других странах Европы.",
+    ka: "იმპლანტოლოგი 25 წელზე მეტი გამოცდილებით დენტალურ იმპლანტაციასა და პროთეზირებაში. კვალიფიკაცია აქვს ამაღლებული საქართველოში, თურქეთში, პოლონეთსა და ევროპის სხვა ქვეყნებში.",
+    en: "Implantologist with more than 25 years of experience in dental implants and prosthetics, with professional training in Georgia, Turkey, Poland and elsewhere in Europe.",
+    ru: "Имплантолог с опытом более 25 лет в дентальной имплантации и протезировании. Проходил обучение в Грузии, Турции, Польше и других странах Европы.",
   },
   team_2_name: { ka: "სალომე", en: "Salome", ru: "Саломе" },
   team_2_role: {
@@ -214,11 +203,6 @@ export const translations = {
     ka: "მკურნალობა თბილისში — დაგეგმილი სახლიდანვე",
     en: "Treatment in Tbilisi, planned from home",
     ru: "Лечение в Тбилиси — планирование из дома",
-  },
-  tour_sub: {
-    ka: "უცხოელ პაციენტებს ვეხმარებით მკურნალობის დაგეგმვაში ჩამოსვლამდე: ონლაინ კონსულტაცია, წინასწარი გეგმა და ხარჯთაღრიცხვა, სასტუმრო კლინიკის გვერდით და ტრანსფერი აეროპორტიდან.",
-    en: "We help patients from abroad plan their treatment before they travel: an online consultation, a preliminary plan and cost estimate, a hotel next to the clinic and an airport transfer.",
-    ru: "Мы помогаем пациентам из-за рубежа спланировать лечение ещё до поездки: онлайн-консультация, предварительный план и смета, гостиница рядом с клиникой и трансфер из аэропорта.",
   },
   tour_f1: {
     ka: "უფასო ონლაინ კონსულტაცია",
@@ -247,9 +231,9 @@ export const translations = {
     ru: "Бесплатная онлайн-консультация",
   },
   tour_s1_d: {
-    ka: "მიხეილ ბახტაძესთან ონლაინ განიხილავთ თქვენს პრობლემას, სამედიცინო ისტორიასა და მოლოდინებს.",
-    en: "Discuss your concerns, dental history and expectations online with Dr. Mikheil Bakhtadze.",
-    ru: "Обсудите онлайн с доктором Михеилом Бахтадзе вашу проблему, историю лечения и ожидания.",
+    ka: "ექიმთან ონლაინ განიხილავთ პრობლემას და მოლოდინებს.",
+    en: "Discuss your case and expectations with the doctor online.",
+    ru: "Обсудите с врачом онлайн вашу ситуацию и ожидания.",
   },
   tour_s2_t: {
     ka: "CT კვლევა და წინასწარი გეგმა",
@@ -257,21 +241,21 @@ export const translations = {
     ru: "КТ-снимок и предварительный план",
   },
   tour_s2_d: {
-    ka: "საჭიროების შემთხვევაში CT/CBCT კვლევას თქვენს ქვეყანაში გაივლით და ფაილებს გამოგვიგზავნით. ექიმი მოგიმზადებთ მკურნალობის ვარიანტებს, წინასწარ ხარჯთაღრიცხვას, ეტაპებსა და თბილისში დარჩენის სავარაუდო ვადას.",
-    en: "If needed, you have a CT/CBCT scan at home and send us the files. The doctor prepares treatment options, a preliminary itemised cost estimate, the stages and the likely time you'll need in Tbilisi.",
-    ru: "При необходимости вы делаете КТ/КЛКТ у себя в стране и присылаете нам файлы. Врач подготовит варианты лечения, предварительную смету, этапы и примерное время пребывания в Тбилиси.",
+    ka: "გამოგვიგზავნეთ CT/CBCT კვლევა — მიიღებთ მკურნალობის გეგმას, ფასსა და ვადებს.",
+    en: "Send us your CT/CBCT scan and receive a treatment plan, cost estimate and timeline.",
+    ru: "Пришлите КТ/КЛКТ — получите план лечения, смету и сроки.",
   },
   tour_s3_t: { ka: "ვიზიტის დაგეგმვა", en: "Planning your visit", ru: "Планирование визита" },
   tour_s3_d: {
-    ka: "წინასწარ ვთანხმდებით ვიზიტის თარიღებზე და გეხმარებით სასტუმროსა და აეროპორტიდან ტრანსფერის ორგანიზებაში.",
-    en: "We agree appointment dates with you in advance and help arrange the hotel and airport pick-up.",
-    ru: "Мы заранее согласуем даты приёма и поможем с гостиницей и трансфером из аэропорта.",
+    ka: "ვთანხმდებით თარიღებზე და გეხმარებით სასტუმროსა და ტრანსფერში.",
+    en: "We agree the dates and help with the hotel and airport transfer.",
+    ru: "Согласуем даты и поможем с гостиницей и трансфером.",
   },
   tour_s4_t: { ka: "მკურნალობა თბილისში", en: "Treatment in Tbilisi", ru: "Лечение в Тбилиси" },
   tour_s4_d: {
-    ka: "ჩამოსვლისას ექიმი გაგსინჯავთ და გადახედავს წინასწარ გეგმას. ნებისმიერ ცვლილებასა თუ დამატებით ხარჯს წინასწარ შეგითანხმებთ.",
-    en: "On arrival the doctor examines you and reviews the preliminary plan. Any changes or extra costs are agreed with you beforehand.",
-    ru: "По приезде врач осмотрит вас и пересмотрит предварительный план. Любые изменения или дополнительные расходы согласовываются с вами заранее.",
+    ka: "ექიმი გაგსინჯავთ და დააზუსტებს გეგმას. ნებისმიერ ცვლილებას წინასწარ შეგითანხმებთ.",
+    en: "The doctor examines you and confirms the plan. Any changes are agreed in advance.",
+    ru: "Врач осмотрит вас и уточнит план. Любые изменения согласуются заранее.",
   },
   tour_s5_t: {
     ka: "კავშირი ვიზიტებს შორის",
@@ -279,14 +263,14 @@ export const translations = {
     ru: "Связь между визитами",
   },
   tour_s5_d: {
-    ka: "იმპლანტაცია შეიძლება ორ ვიზიტად გაიყოს — შეხორცებას რამდენიმე თვე სჭირდება. ამ პერიოდში ექიმთან ონლაინ კავშირს ინარჩუნებთ.",
-    en: "Implant treatment may take more than one visit, as healing takes several months. In between, you stay in contact with the doctor online.",
-    ru: "Имплантация может проходить в несколько визитов — заживление занимает несколько месяцев. Всё это время вы остаётесь на связи с врачом онлайн.",
+    ka: "იმპლანტაციას შეიძლება ორი ვიზიტი დასჭირდეს. ვიზიტებს შორის ექიმთან ონლაინ კავშირში რჩებით.",
+    en: "Implants may need two visits. In between, you stay in touch with the doctor online.",
+    ru: "Имплантация может потребовать двух визитов. Между ними вы на связи с врачом онлайн.",
   },
   tour_note: {
-    ka: "საბოლოო დიაგნოზი, გეგმა, ფასი და ვადები დგინდება კლინიკაში გასინჯვის შემდეგ.",
-    en: "The final diagnosis, treatment plan, cost and timeline are confirmed after an in-person examination.",
-    ru: "Окончательный диагноз, план лечения, стоимость и сроки подтверждаются после очного осмотра.",
+    ka: "საბოლოო გეგმა და ფასი დგინდება კლინიკაში გასინჯვის შემდეგ.",
+    en: "The final plan and cost are confirmed after an in-person examination.",
+    ru: "Окончательный план и стоимость подтверждаются после очного осмотра.",
   },
   tour_cta: {
     ka: "უფასო ონლაინ კონსულტაცია",
@@ -302,9 +286,9 @@ export const translations = {
   // Hotel
   hotel_eyebrow: { ka: "განთავსება", en: "Accommodation", ru: "Проживание" },
   hotel_sub: {
-    ka: "სასტუმრო კლინიკის გვერდით, თბილისის ცენტრში. ჩვენი პაციენტებისთვის მოქმედებს სპეციალური ფასდაკლება.",
-    en: "A hotel next to the clinic in central Tbilisi, with special discounted rates for our patients.",
-    ru: "Гостиница рядом с клиникой в центре Тбилиси со специальными скидками для наших пациентов.",
+    ka: "სასტუმრო კლინიკის გვერდით — სპეციალური ფასები ჩვენი პაციენტებისთვის.",
+    en: "A hotel next to the clinic, with special rates for our patients.",
+    ru: "Гостиница рядом с клиникой со специальными ценами для наших пациентов.",
   },
   hotel_rates_caption: {
     ka: "ფასები ოქტომბერი–აპრილი · USD, ოთახი / ღამე",
@@ -323,19 +307,19 @@ export const translations = {
   hotel_room_2: { ka: "Deluxe", en: "Deluxe", ru: "Делюкс" },
   hotel_room_3: { ka: "საოჯახო Double", en: "Family Double", ru: "Семейный Double" },
   hotel_amenities: {
-    ka: "ფასში შედის დღგ. ოთახებში: სეიფი, მინიბარი, უფასო წყალი და ჩაი, ჰიგიენური საშუალებები, ფენი, ხალათი და ჩუსტები. Room service — 24 საათი.",
-    en: "VAT included. Rooms have a safe, minibar, free water and tea, toiletries, hair dryer, bathrobe and slippers. 24-hour room service.",
-    ru: "НДС включён. В номерах: сейф, мини-бар, бесплатная вода и чай, туалетные принадлежности, фен, халат и тапочки. Круглосуточное обслуживание номеров.",
+    ka: "ფასში შედის დღგ. ოთახში: სეიფი, მინიბარი, ფენი, ხალათი. Room service — 24/7.",
+    en: "VAT included. Safe, minibar, hair dryer and bathrobe in every room. 24/7 room service.",
+    ru: "НДС включён. В номере: сейф, мини-бар, фен, халат. Обслуживание номеров 24/7.",
   },
   hotel_kids: {
-    ka: "7 წლამდე ბავშვები — უფასოდ. 7–12 წლის ბავშვი — $10 ღამეში (დამატებითი საწოლის გარეშე, საუზმით). გადახდა — ეროვნული ბანკის კურსით.",
-    en: "Children under 7 stay free. Ages 7–12: $10 per night without an extra bed (breakfast included). Paid at the National Bank of Georgia rate.",
-    ru: "Дети до 7 лет — бесплатно. 7–12 лет — $10 за ночь без дополнительной кровати (с завтраком). Оплата по курсу Национального банка Грузии.",
+    ka: "7 წლამდე ბავშვები — უფასოდ, 7–12 წლის — $10 ღამეში.",
+    en: "Children under 7 stay free; ages 7–12: $10 per night.",
+    ru: "Дети до 7 лет — бесплатно, 7–12 лет — $10 за ночь.",
   },
   hotel_separate: {
-    ka: "სასტუმრო და ტრანსფერი ანაზღაურდება მკურნალობისგან ცალკე. დაჯავშნისთვის დაუკავშირდით სასტუმროს:",
-    en: "Hotel and transfer are paid separately from treatment. To book, contact the hotel:",
-    ru: "Гостиница и трансфер оплачиваются отдельно от лечения. Для бронирования свяжитесь с гостиницей:",
+    ka: "სასტუმრო და ტრანსფერი ცალკე იხდება. დაჯავშნა:",
+    en: "Hotel and transfer are paid separately. Booking:",
+    ru: "Гостиница и трансфер оплачиваются отдельно. Бронирование:",
   },
 
   // Reviews

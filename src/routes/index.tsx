@@ -187,6 +187,17 @@ function BeforeAfterSlider({
   );
 }
 
+/** Thematic photo frame: gold hairline, ivory mat, soft navy shadow. */
+function Frame({ children, className = "" }: { children: ReactNode; className?: string }) {
+  return (
+    <div
+      className={`border border-gold/60 bg-card p-1.5 shadow-[0_24px_50px_-28px_rgba(10,40,90,0.45)] sm:p-2.5 ${className}`}
+    >
+      <div className="relative overflow-hidden border border-primary/15">{children}</div>
+    </div>
+  );
+}
+
 function Monogram({ className = "" }: { className?: string }) {
   return (
     <span
@@ -399,7 +410,7 @@ function Hero({ lang }: { lang: Lang }) {
       {/* Full-bleed dark panel with angled bottom edge */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[calc(100%-300px)] lg:h-[clamp(680px,88vh,980px)]"
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[calc(100%-190px)] lg:h-[clamp(680px,88vh,980px)]"
         style={{
           background:
             "linear-gradient(155deg, oklch(0.32 0.08 240) 0%, oklch(0.5 0.135 240) 55%, oklch(0.44 0.11 235) 100%)",
@@ -408,7 +419,7 @@ function Hero({ lang }: { lang: Lang }) {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[calc(100%-300px)] opacity-50 lg:h-[clamp(680px,88vh,980px)]"
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[calc(100%-190px)] opacity-50 lg:h-[clamp(680px,88vh,980px)]"
         style={{
           background:
             "radial-gradient(45% 55% at 88% 12%, oklch(0.72 0.09 85 / 0.35), transparent 70%)",
@@ -416,7 +427,7 @@ function Hero({ lang }: { lang: Lang }) {
         }}
       />
 
-      <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-14 px-6 pb-32 lg:grid-cols-12 lg:items-start lg:gap-16 lg:px-10 lg:pb-24">
+      <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-10 px-6 pb-16 lg:grid-cols-12 lg:items-start lg:gap-16 lg:px-10 lg:pb-24">
         <div className="lg:col-span-6">
           <Reveal>
             <p className="text-[12px] leading-snug text-primary-foreground/55 italic">
@@ -475,18 +486,15 @@ function Hero({ lang }: { lang: Lang }) {
         {/* Hero image */}
         <div className="lg:col-span-6">
           <motion.div style={{ y }} className="relative lg:-mt-16">
-            <div
-              className="w-full overflow-hidden border-[6px] border-background shadow-[0_30px_60px_-20px_rgba(10,30,60,0.45)]"
-              style={{ aspectRatio: "4 / 5" }}
-            >
+            <Frame className="shadow-[0_30px_60px_-20px_rgba(10,30,60,0.45)]">
               <img
                 src="/img/cabinet.jpg"
                 alt={t("hero_image_alt")}
-                className="h-full w-full object-cover object-[55%_50%]"
+                className="aspect-[4/3] h-full w-full object-cover object-[55%_50%] lg:aspect-[4/5]"
               />
-            </div>
+            </Frame>
             {/* Small caption block */}
-            <div className="absolute bottom-6 left-6 max-w-[260px] border-t border-gold/70 bg-background/95 px-5 py-4 backdrop-blur-sm">
+            <div className="absolute bottom-5 left-5 max-w-[260px] border-t border-gold/70 bg-background/95 px-4 py-3 backdrop-blur-sm sm:bottom-8 sm:left-8 sm:px-5 sm:py-4">
               <p
                 className="text-sm leading-snug text-primary"
                 style={{ fontFamily: "var(--font-serif)" }}
@@ -553,7 +561,7 @@ function Services({ lang }: { lang: Lang }) {
   ] as const;
 
   return (
-    <section id="services" className="mx-auto max-w-[1400px] px-6 py-28 lg:px-10 lg:py-36">
+    <section id="services" className="mx-auto max-w-[1400px] px-6 py-16 sm:py-24 lg:px-10 lg:py-36">
       <div className="mx-auto max-w-2xl text-center">
         <Reveal>
           <div className="flex items-center justify-center gap-3">
@@ -572,7 +580,7 @@ function Services({ lang }: { lang: Lang }) {
         </Reveal>
       </div>
 
-      <div className="mt-16 grid grid-cols-2 gap-4 sm:gap-8 lg:grid-cols-4">
+      <div className="mt-10 grid grid-cols-2 gap-3 sm:mt-16 sm:gap-8 lg:grid-cols-4">
         {svcs.map(({ icon: Icon, t: tk, d: dk, img }, i) => (
           <Reveal key={tk} delay={i * 0.08} className="h-full">
             <div className="group flex h-full flex-col overflow-hidden border border-border/80 bg-card shadow-[0_1px_2px_rgba(20,40,70,0.04)] transition-shadow duration-500 hover:shadow-[0_18px_40px_-16px_rgba(20,60,110,0.22)]">
@@ -615,33 +623,23 @@ function WhyUs({ lang }: { lang: Lang }) {
 
   return (
     <section id="about" className="bg-ivory">
-      <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-14 px-6 py-28 lg:grid-cols-12 lg:gap-20 lg:px-10 lg:py-36">
+      <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-14 px-6 py-16 sm:py-24 lg:grid-cols-12 lg:gap-20 lg:px-10 lg:py-36">
         <div className="lg:col-span-6">
           <Reveal>
             <div className="relative">
-              <div
-                className="w-full overflow-hidden border border-border/80"
-                style={{ aspectRatio: "4 / 3" }}
-              >
+              <Frame>
                 <img
                   src="/img/certificates.jpg"
                   alt={t("whyus_image_alt")}
-                  className="h-full w-full object-cover"
+                  className="aspect-[4/3] w-full object-cover"
                 />
-              </div>
-              <div
-                aria-hidden
-                className="pointer-events-none absolute -bottom-4 -left-4 -z-10 h-full w-full border border-gold/50"
-              />
-              <div className="absolute right-4 -bottom-6 max-w-[240px] border-t border-gold/70 bg-background/95 px-5 py-4 shadow-[0_12px_30px_-12px_rgba(10,30,60,0.35)] sm:right-6">
+              </Frame>
+              <div className="absolute right-4 -bottom-5 border-t border-gold/70 bg-background/95 px-4 py-3 shadow-[0_12px_30px_-12px_rgba(10,30,60,0.35)] sm:right-6 sm:px-5">
                 <p
                   className="text-sm leading-snug text-primary"
                   style={{ fontFamily: "var(--font-serif)" }}
                 >
                   {t("why_cert_caption")}
-                </p>
-                <p className="mt-1 text-[10px] tracking-[0.18em] text-muted-foreground">
-                  {t("why_cert_caption_sub")}
                 </p>
               </div>
             </div>
@@ -741,7 +739,7 @@ function BeforeAfter({ lang }: { lang: Lang }) {
 function Team({ lang }: { lang: Lang }) {
   const t = useT(lang);
   return (
-    <section id="team" className="mx-auto max-w-[1400px] px-6 py-28 lg:px-10 lg:py-36">
+    <section id="team" className="mx-auto max-w-[1400px] px-6 py-16 sm:py-24 lg:px-10 lg:py-36">
       <div className="mx-auto max-w-2xl text-center">
         <Reveal>
           <div className="flex items-center justify-center gap-3">
@@ -761,29 +759,22 @@ function Team({ lang }: { lang: Lang }) {
       </div>
 
       {/* Featured: Mikheil Bakhtadze */}
-      <div className="mt-20 grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
+      <div className="mt-10 grid grid-cols-1 items-center gap-8 lg:mt-20 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-5">
           <Reveal>
-            <div className="relative">
-              <div className="aspect-[4/5] w-full overflow-hidden border border-border/80">
-                <img
-                  src="/img/mikheilbakhtadze.jpg"
-                  alt={t("team_1_name")}
-                  className="h-full w-full object-cover object-top"
-                />
-              </div>
-              <div
-                aria-hidden
-                className="pointer-events-none absolute -bottom-4 -right-4 -z-10 h-full w-full border border-gold/50"
+            <Frame className="mx-auto max-w-[420px] lg:max-w-none">
+              <img
+                src="/img/mikheilbakhtadze.jpg"
+                alt={t("team_1_name")}
+                className="aspect-[4/5] w-full object-cover object-top"
               />
-            </div>
+            </Frame>
           </Reveal>
         </div>
         <div className="lg:col-span-7">
           <Reveal delay={0.1}>
-            <span className="eyebrow">{t("team_owner_label")}</span>
             <h3
-              className="mt-4 text-[clamp(1.8rem,3vw,2.6rem)] leading-[1.05] text-primary"
+              className="text-[clamp(1.8rem,3vw,2.6rem)] leading-[1.05] text-primary"
               style={{ fontFamily: "var(--font-serif)" }}
             >
               {t("team_1_name")}
@@ -791,13 +782,9 @@ function Team({ lang }: { lang: Lang }) {
             <p className="mt-2 text-[13px] tracking-[0.18em] uppercase text-gold">
               {t("team_1_role")}
             </p>
-            <p className="mt-6 max-w-xl text-[15.5px] leading-relaxed text-foreground/75">
+            <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-foreground/75">
               {t("team_1_bio")}
             </p>
-            <div className="mt-8 flex items-center gap-4 text-[12px] tracking-[0.2em] text-muted-foreground">
-              <span className="hairline" />
-              <span>{t("team_experience")}</span>
-            </div>
             <div className="mt-8">
               <a
                 href="#contact"
@@ -812,29 +799,29 @@ function Team({ lang }: { lang: Lang }) {
       </div>
 
       {/* Supporting team */}
-      <div className="mt-24 grid grid-cols-1 gap-10 sm:grid-cols-2">
+      <div className="mt-14 grid grid-cols-2 gap-4 sm:gap-10 lg:mt-24">
         {[
           { n: "team_2_name", r: "team_2_role", img: "/img/salome.png" },
           { n: "team_3_name", r: "team_3_role", img: "/img/ani.png" },
         ].map((m, i) => (
           <Reveal key={m.n} delay={i * 0.1}>
             <div className="group">
-              <div className="aspect-[5/6] w-full overflow-hidden border border-border/80 lg:aspect-[4/3.4]">
+              <Frame>
                 <img
                   src={m.img}
                   alt={t(m.n as TranslationKey)}
-                  className="h-full w-full object-cover object-[50%_20%] transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                  className="aspect-[4/5] w-full object-cover object-[50%_20%] transition-transform duration-700 ease-out group-hover:scale-[1.03] lg:aspect-[4/3.4]"
                 />
-              </div>
-              <div className="mt-6 flex items-start justify-between gap-4 border-t border-border pt-5">
+              </Frame>
+              <div className="mt-4 flex items-start justify-between gap-4 sm:mt-6">
                 <div>
                   <h4
-                    className="text-[19px] leading-snug text-primary"
+                    className="text-[17px] leading-snug text-primary sm:text-[19px]"
                     style={{ fontFamily: "var(--font-serif)" }}
                   >
                     {t(m.n as TranslationKey)}
                   </h4>
-                  <p className="mt-1 text-[11.5px] tracking-[0.2em] uppercase text-gold">
+                  <p className="mt-1 text-[10px] tracking-[0.14em] uppercase text-gold sm:text-[11.5px] sm:tracking-[0.2em]">
                     {t(m.r as TranslationKey)}
                   </p>
                 </div>
@@ -874,7 +861,7 @@ function Tourism({ lang }: { lang: Lang }) {
 
   return (
     <section id="tourism" className="bg-ivory">
-      <div className="mx-auto max-w-[1400px] px-6 py-28 lg:px-10 lg:py-36">
+      <div className="mx-auto max-w-[1400px] px-6 py-16 sm:py-24 lg:px-10 lg:py-36">
         <div className="mx-auto max-w-2xl text-center">
           <Reveal>
             <div className="flex items-center justify-center gap-3">
@@ -888,18 +875,15 @@ function Tourism({ lang }: { lang: Lang }) {
               {t("tour_title")}
             </h2>
           </Reveal>
-          <Reveal delay={0.2}>
-            <p className="mt-5 text-[15px] leading-relaxed text-foreground/70">{t("tour_sub")}</p>
-          </Reveal>
         </div>
 
         {/* Feature tiles */}
         <Reveal delay={0.2}>
-          <div className="mt-14 grid grid-cols-2 gap-px border border-border/80 bg-border/80 lg:grid-cols-4">
+          <div className="mt-10 grid grid-cols-2 gap-px border border-border/80 bg-border/80 lg:mt-14 lg:grid-cols-4">
             {features.map(({ icon: Icon, k }) => (
               <div
                 key={k}
-                className="flex flex-col items-center gap-3 bg-card px-4 py-7 text-center"
+                className="flex flex-col items-center gap-2.5 bg-card px-3 py-5 text-center sm:px-4 sm:py-7"
               >
                 <Icon className="h-6 w-6 text-gold" strokeWidth={1.25} />
                 <span className="text-[13.5px] leading-snug text-foreground">{t(k)}</span>
@@ -909,22 +893,16 @@ function Tourism({ lang }: { lang: Lang }) {
         </Reveal>
 
         {/* Steps */}
-        <div className="mt-24 grid grid-cols-1 items-start gap-14 lg:grid-cols-12 lg:gap-20">
-          <div className="lg:sticky lg:top-28 lg:col-span-5">
+        <div className="mt-12 grid grid-cols-1 items-start gap-14 lg:mt-24 lg:grid-cols-12 lg:gap-20">
+          <div className="hidden lg:sticky lg:top-28 lg:col-span-5 lg:block">
             <Reveal>
-              <div className="relative">
-                <div className="aspect-[4/3] w-full overflow-hidden border border-border/80 lg:aspect-[4/5]">
-                  <img
-                    src="/img/interier.jpg"
-                    alt={t("tour_image_alt")}
-                    className="h-full w-full object-cover object-[50%_35%]"
-                  />
-                </div>
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute -right-4 -bottom-4 -z-10 h-full w-full border border-gold/50"
+              <Frame>
+                <img
+                  src="/img/interier.jpg"
+                  alt={t("tour_image_alt")}
+                  className="aspect-[4/5] w-full object-cover object-[50%_35%]"
                 />
-              </div>
+              </Frame>
             </Reveal>
           </div>
 
@@ -940,7 +918,7 @@ function Tourism({ lang }: { lang: Lang }) {
             <ol className="mt-8">
               {steps.map((s, i) => (
                 <Reveal key={s.t} delay={i * 0.06}>
-                  <li className="grid grid-cols-[3rem_1fr] gap-4 border-t border-border/70 py-6 sm:grid-cols-[4rem_1fr]">
+                  <li className="grid grid-cols-[2.5rem_1fr] gap-3 border-t border-border/70 py-4 sm:grid-cols-[4rem_1fr] sm:gap-4 sm:py-6">
                     <span
                       className="text-[26px] leading-none text-gold sm:text-[30px]"
                       style={{ fontFamily: "var(--font-serif)" }}
@@ -976,8 +954,8 @@ function Tourism({ lang }: { lang: Lang }) {
 
         {/* Hotel */}
         <Reveal>
-          <div className="mt-24 grid grid-cols-1 border border-border/80 bg-card lg:grid-cols-12">
-            <div className="border-b border-border/80 p-7 sm:p-10 lg:col-span-5 lg:border-r lg:border-b-0 lg:p-12">
+          <div className="mt-12 grid grid-cols-1 border border-border/80 bg-card lg:mt-24 lg:grid-cols-12">
+            <div className="border-b border-border/80 p-6 sm:p-10 lg:col-span-5 lg:border-r lg:border-b-0 lg:p-12">
               <div className="flex items-center gap-3">
                 <Hotel className="h-4 w-4 text-gold" strokeWidth={1.5} />
                 <span className="eyebrow">{t("hotel_eyebrow")}</span>
@@ -1021,7 +999,7 @@ function Tourism({ lang }: { lang: Lang }) {
               </ul>
             </div>
 
-            <div className="p-7 sm:p-10 lg:col-span-7 lg:p-12">
+            <div className="p-6 sm:p-10 lg:col-span-7 lg:p-12">
               <div className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
                 {t("hotel_rates_caption")}
               </div>
@@ -1095,7 +1073,7 @@ function Reviews({ lang }: { lang: Lang }) {
         }}
       />
 
-      <div className="relative mx-auto max-w-[1400px] px-6 py-28 lg:px-10 lg:py-36">
+      <div className="relative mx-auto max-w-[1400px] px-6 py-16 sm:py-24 lg:px-10 lg:py-36">
         <div className="mx-auto max-w-2xl text-center">
           <Reveal>
             <div className="flex items-center justify-center gap-3">
@@ -1118,18 +1096,18 @@ function Reviews({ lang }: { lang: Lang }) {
           </Reveal>
         </div>
 
-        <div className="mt-20 grid grid-cols-1 gap-px bg-primary-foreground/10 lg:grid-cols-3">
+        <div className="mt-10 grid grid-cols-1 gap-px bg-primary-foreground/10 lg:mt-20 lg:grid-cols-3">
           {reviews.map((r, i) => (
             <Reveal key={r.text} delay={i * 0.1}>
-              <figure className="flex h-full flex-col justify-between bg-primary p-8 lg:p-10">
+              <figure className="flex h-full flex-col justify-between bg-primary p-6 sm:p-8 lg:p-10">
                 <Quote className="h-6 w-6 text-gold" strokeWidth={1.25} />
                 <blockquote
-                  className="mt-6 text-[16px] leading-[1.65] text-primary-foreground/95"
+                  className="mt-4 text-[15px] leading-[1.6] text-primary-foreground/95 sm:mt-6 sm:text-[16px]"
                   style={{ fontFamily: "var(--font-serif)" }}
                 >
                   “{t(r.text)}”
                 </blockquote>
-                <figcaption className="mt-8 flex items-center gap-3 border-t border-primary-foreground/15 pt-5">
+                <figcaption className="mt-5 flex items-center gap-3 border-t border-primary-foreground/15 pt-5">
                   <span className="h-px w-6 bg-gold" />
                   <span className="text-[12px] tracking-[0.2em] uppercase text-primary-foreground/80">
                     {t(r.author)}
@@ -1155,7 +1133,7 @@ function Contact({ lang }: { lang: Lang }) {
 
   return (
     <section id="contact" className="bg-ivory">
-      <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-16 px-6 py-28 lg:grid-cols-12 lg:gap-20 lg:px-10 lg:py-36">
+      <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-10 px-6 py-16 sm:py-24 lg:grid-cols-12 lg:gap-20 lg:px-10 lg:py-36">
         {/* Left: contact actions */}
         <div className="lg:col-span-7">
           <Reveal>
@@ -1176,7 +1154,7 @@ function Contact({ lang }: { lang: Lang }) {
           </Reveal>
 
           <Reveal delay={0.3}>
-            <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div className="mt-8 grid grid-cols-1 gap-3 sm:mt-12 sm:grid-cols-2 sm:gap-4">
               <a
                 href={FACEBOOK_CHAT_URL}
                 target="_blank"
@@ -1221,8 +1199,8 @@ function Contact({ lang }: { lang: Lang }) {
         {/* Right: info + map */}
         <div className="lg:col-span-5">
           <Reveal delay={0.2}>
-            <div className="border border-border bg-card p-8 lg:p-10">
-              <ul className="space-y-8">
+            <div className="border border-border bg-card p-6 sm:p-8 lg:p-10">
+              <ul className="space-y-6">
                 <li className="flex gap-4">
                   <MapPin className="mt-1 h-5 w-5 shrink-0 text-gold" strokeWidth={1.25} />
                   <div>
@@ -1262,15 +1240,15 @@ function Contact({ lang }: { lang: Lang }) {
                 </li>
               </ul>
 
-              <div className="mt-8 h-px w-full bg-border" />
+              <div className="mt-6 h-px w-full bg-border" />
 
               {/* Map */}
-              <div className="mt-8 overflow-hidden border border-border">
+              <div className="mt-6 overflow-hidden border border-border">
                 <iframe
                   title="St. Luke's Dental Clinic — Tbilisi"
                   src="https://www.google.com/maps?q=Paolo+Iashvili+12,+Tbilisi&output=embed"
                   loading="lazy"
-                  className="block h-64 w-full grayscale-[35%] contrast-[0.95]"
+                  className="block h-52 w-full grayscale-[35%] contrast-[0.95]"
                 />
               </div>
             </div>
@@ -1291,7 +1269,7 @@ function Footer({ lang }: { lang: Lang }) {
 
   return (
     <footer className="border-t border-border bg-background">
-      <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-12 px-6 py-16 md:grid-cols-12 lg:px-10">
+      <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-8 px-6 py-12 md:grid-cols-12 md:gap-12 md:py-16 lg:px-10">
         <div className="md:col-span-5">
           <div className="flex items-center gap-3">
             <Monogram />
@@ -1312,7 +1290,7 @@ function Footer({ lang }: { lang: Lang }) {
           </p>
         </div>
 
-        <div className="md:col-span-3">
+        <div className="hidden md:col-span-3 md:block">
           <div className="text-[11px] uppercase tracking-[0.22em] text-gold">{t("footer_nav")}</div>
           <ul className="mt-5 space-y-2.5 text-[14px] text-foreground/75">
             {[
